@@ -1,18 +1,8 @@
-import { useState } from 'react';
+interface ButtonValue {
+    value: string,
+    onSquareClick: any
+}
 
-export default function Square() {
-  const [buttonValue, setButtonValue] = useState('');
-
-  function handleClick() {
-    setButtonValue('X');
-  }
-
-  return (
-    <button 
-      className="square"
-      onClick={handleClick}
-    >
-      {buttonValue}
-    </button>
-  );
+export default function Square({ value, onSquareClick }: ButtonValue) {
+  return <button className="square" onClick={onSquareClick}>{value}</button>;
 }
