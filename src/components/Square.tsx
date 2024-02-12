@@ -9,10 +9,12 @@ interface ButtonValue {
 export default function Square({ value, onSquareClick, isX }: ButtonValue) {
   const [isHovering, setIsHovering] = useState<boolean>(false);
   const buttonStyle = {
-    color: isHovering && !value ? 'grey' : 'black'
+    color: isHovering && !value ? 'grey' : 'black',
+    backgroundColor: getBackgroundValue(),
+    ['font-weight']: value && '700'
   }
 
-  function setValue() {
+  function getValue() {
     if (value) {
         return value;
     }
@@ -20,6 +22,23 @@ export default function Square({ value, onSquareClick, isX }: ButtonValue) {
         return isX ? 'X' : 'O';
     }
 
+    return '';
+  }
+
+  function getBackgroundValue() {
+    if (value && value === 'O') {
+        return '#db6360';
+    }
+    if (value && value === 'X') {
+        return '#72cc7b';
+    }
+    if (isHovering && !value && !isX) {
+        return '#e8cac3';
+    }
+    if (isHovering && !value && isX) {
+        return '#d5f0db';
+    }
+    
     return '';
   }
 
@@ -31,7 +50,7 @@ export default function Square({ value, onSquareClick, isX }: ButtonValue) {
       onMouseLeave={() => setIsHovering(false)}
       style={buttonStyle}
     >
-      {setValue()}
+      {getValue()}
     </button>
   );
 }
