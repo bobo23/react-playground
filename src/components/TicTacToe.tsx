@@ -41,7 +41,7 @@ function getStatus({ end, xIsNext }: StatusValue) {
     return 'That\'s a draw!';
   }
   if (end) {
-    return end + ' is the winner!';
+    return '🎉 ' + end + ' wins! 🎉';
   }
 
   return 'Next player: ' + (xIsNext ? 'X' : 'O');

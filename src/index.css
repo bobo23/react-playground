@@ -67,6 +67,11 @@ button {
   padding: 10px 20px;
 }
 
+.board-row {
+  display: flex;
+  justify-content: center;
+}
+
 .square {
   height: 44px;
   width: 44px;
@@ -77,8 +82,20 @@ button {
 
 .status {
   padding: 10px 20px;
+  display: flex;
+  justify-content: center;
 }
 
 .reset {
   padding: 10px 20px;
+  display: flex;
+  justify-content: center;
+
+  button {
+    width: 80%;
+    padding: 5px 0px;
+  }
+  button:hover {
+    background-color: #b3b1ad;
+  }
 }
