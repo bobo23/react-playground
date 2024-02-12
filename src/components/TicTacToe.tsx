@@ -5,7 +5,7 @@ interface SquaresValue {
   squares: string[]
 }
 interface StatusValue {
-  end: null | string,
+  end: null|string,
   xIsNext: boolean
 }
 

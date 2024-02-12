@@ -4,7 +4,7 @@ interface ButtonValue {
     value: string,
     onSquareClick: any,
     isX: boolean,
-    end: null | string
+    end: null|string
 }
 
 export default function Square({ value, onSquareClick, isX, end }: ButtonValue) {

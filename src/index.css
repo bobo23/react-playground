@@ -27,6 +27,7 @@ body {
   padding: 20px;
   display: flex;
   place-items: center;
+  justify-content: center;
   min-width: 320px;
   min-height: 100vh;
 }
@@ -56,6 +57,12 @@ button {
   button {
     background-color: #f9f9f9;
   }
+}
+
+.app {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .tictactoe {
