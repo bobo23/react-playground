@@ -28,7 +28,7 @@ function calculateWinner({ squares }: SquaresValue) {
   return null;
 }
 
-export default function Board() {
+export default function TixTacToe() {
   const [xIsNext, setXIsNext] = useState<boolean>(true);
   const [squares, setSquares] = useState<string[]>(Array(9).fill(''));
 
@@ -67,19 +67,19 @@ export default function Board() {
     <div className="tictactoe">
       <div className="board">
         <div className="board-row">
-          <Square value={squares[0]} onSquareClick={() => handleClick(0)} />
-          <Square value={squares[1]} onSquareClick={() => handleClick(1)} />
-          <Square value={squares[2]} onSquareClick={() => handleClick(2)} />
+          <Square value={squares[0]} onSquareClick={() => handleClick(0)} isX={xIsNext} />
+          <Square value={squares[1]} onSquareClick={() => handleClick(1)} isX={xIsNext} />
+          <Square value={squares[2]} onSquareClick={() => handleClick(2)} isX={xIsNext} />
         </div>
         <div className="board-row">
-          <Square value={squares[3]} onSquareClick={() => handleClick(3)} />
-          <Square value={squares[4]} onSquareClick={() => handleClick(4)} />
-          <Square value={squares[5]} onSquareClick={() => handleClick(5)} />
+          <Square value={squares[3]} onSquareClick={() => handleClick(3)} isX={xIsNext} />
+          <Square value={squares[4]} onSquareClick={() => handleClick(4)} isX={xIsNext} />
+          <Square value={squares[5]} onSquareClick={() => handleClick(5)} isX={xIsNext} />
         </div>
         <div className="board-row">
-          <Square value={squares[6]} onSquareClick={() => handleClick(6)} />
-          <Square value={squares[7]} onSquareClick={() => handleClick(7)} />
-          <Square value={squares[8]} onSquareClick={() => handleClick(8)} />
+          <Square value={squares[6]} onSquareClick={() => handleClick(6)} isX={xIsNext} />
+          <Square value={squares[7]} onSquareClick={() => handleClick(7)} isX={xIsNext} />
+          <Square value={squares[8]} onSquareClick={() => handleClick(8)} isX={xIsNext} />
         </div>
       </div>
       <div className="status">{status}</div>

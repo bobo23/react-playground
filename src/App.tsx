@@ -1,9 +1,9 @@
-import Board from './components/Board';
+import TicTacToe from './components/TicTacToe';
 
 export default function App() {
   return (
     <>
-      <Board />
+      <TicTacToe />
     </>
   )
 }
