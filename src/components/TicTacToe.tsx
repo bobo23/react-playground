@@ -4,8 +4,12 @@ import Square from './Square';
 interface SquaresValue {
   squares: string[]
 }
+interface StatusValue {
+  end: null | string,
+  xIsNext: boolean
+}
 
-function calculateWinner({ squares }: SquaresValue) {
+function calculateEnd({ squares }: SquaresValue) {
   const lines = [
     [0, 1, 2],
     [3, 4, 5],
@@ -25,7 +29,22 @@ function calculateWinner({ squares }: SquaresValue) {
     }
   }
 
+  if (squares.every(s => s.length > 0)) {
+    return 'draw';
+  }
+
   return null;
+}
+
+function getStatus({ end, xIsNext }: StatusValue) {
+  if (end && end === 'draw') {
+    return 'That\'s a draw!';
+  }
+  if (end) {
+    return end + 'is the winner!';
+  }
+
+  return 'Next player: ' + (xIsNext ? 'X' : 'O');
 }
 
 export default function TixTacToe() {
@@ -33,7 +52,7 @@ export default function TixTacToe() {
   const [squares, setSquares] = useState<string[]>(Array(9).fill(''));
 
   function handleClick(index: number) {
-    if (squares[index] || calculateWinner({ squares })) {
+    if (squares[index] || calculateEnd({ squares })) {
       return;
     }
 
@@ -54,37 +73,31 @@ export default function TixTacToe() {
     setXIsNext(true);
   }
 
-  const winner = calculateWinner({ squares });
-  let status;
-
-  if (winner) {
-    status = 'Winner: ' + winner;
-  } else {
-    status = 'Next player: ' + (xIsNext ? 'X' : 'O');
-  }
+  const end = calculateEnd({ squares });
+  const status = getStatus({ end, xIsNext });
 
   return (
     <div className="tictactoe">
       <div className="board">
         <div className="board-row">
-          <Square value={squares[0]} onSquareClick={() => handleClick(0)} isX={xIsNext} />
-          <Square value={squares[1]} onSquareClick={() => handleClick(1)} isX={xIsNext} />
-          <Square value={squares[2]} onSquareClick={() => handleClick(2)} isX={xIsNext} />
+          <Square value={squares[0]} onSquareClick={() => handleClick(0)} isX={xIsNext} end={end} />
+          <Square value={squares[1]} onSquareClick={() => handleClick(1)} isX={xIsNext} end={end} />
+          <Square value={squares[2]} onSquareClick={() => handleClick(2)} isX={xIsNext} end={end} />
         </div>
         <div className="board-row">
-          <Square value={squares[3]} onSquareClick={() => handleClick(3)} isX={xIsNext} />
-          <Square value={squares[4]} onSquareClick={() => handleClick(4)} isX={xIsNext} />
-          <Square value={squares[5]} onSquareClick={() => handleClick(5)} isX={xIsNext} />
+          <Square value={squares[3]} onSquareClick={() => handleClick(3)} isX={xIsNext} end={end} />
+          <Square value={squares[4]} onSquareClick={() => handleClick(4)} isX={xIsNext} end={end} />
+          <Square value={squares[5]} onSquareClick={() => handleClick(5)} isX={xIsNext} end={end} />
         </div>
         <div className="board-row">
-          <Square value={squares[6]} onSquareClick={() => handleClick(6)} isX={xIsNext} />
-          <Square value={squares[7]} onSquareClick={() => handleClick(7)} isX={xIsNext} />
-          <Square value={squares[8]} onSquareClick={() => handleClick(8)} isX={xIsNext} />
+          <Square value={squares[6]} onSquareClick={() => handleClick(6)} isX={xIsNext} end={end} />
+          <Square value={squares[7]} onSquareClick={() => handleClick(7)} isX={xIsNext} end={end} />
+          <Square value={squares[8]} onSquareClick={() => handleClick(8)} isX={xIsNext} end={end} />
         </div>
       </div>
       <div className="status">{status}</div>
       <div className="reset">
-        {winner && (<button onClick={handleReset}>Reset</button>)}
+        {end && (<button onClick={handleReset}>Reset</button>)}
       </div>
     </div>
   );

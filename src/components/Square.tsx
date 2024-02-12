@@ -3,22 +3,23 @@ import { useState } from 'react';
 interface ButtonValue {
     value: string,
     onSquareClick: any,
-    isX: boolean
+    isX: boolean,
+    end: null | string
 }
 
-export default function Square({ value, onSquareClick, isX }: ButtonValue) {
+export default function Square({ value, onSquareClick, isX, end }: ButtonValue) {
   const [isHovering, setIsHovering] = useState<boolean>(false);
   const buttonStyle = {
     color: isHovering && !value ? 'grey' : 'black',
     backgroundColor: getBackgroundValue(),
-    ['font-weight']: value && '700'
+    fontWeight: value && '700'
   }
 
   function getValue() {
     if (value) {
         return value;
     }
-    if (isHovering) {
+    if (!end && isHovering) {
         return isX ? 'X' : 'O';
     }
 
@@ -32,10 +33,10 @@ export default function Square({ value, onSquareClick, isX }: ButtonValue) {
     if (value && value === 'X') {
         return '#72cc7b';
     }
-    if (isHovering && !value && !isX) {
+    if (!end && isHovering && !value && !isX) {
         return '#e8cac3';
     }
-    if (isHovering && !value && isX) {
+    if (!end && isHovering && !value && isX) {
         return '#d5f0db';
     }
     
