@@ -37,6 +37,11 @@ h1 {
   line-height: 1.1;
 }
 
+h2 {
+  display: flex;
+  justify-content: center;
+}
+
 button {
   border: 1px solid black;
   font-size: 1em;
@@ -65,9 +70,17 @@ button {
   justify-content: center;
 }
 
+.feature {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 10px;
+}
+
 .tictactoe {
   display: flex;
   flex-direction: column;
+  justify-content: center;
 }
 
 .board {
