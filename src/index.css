@@ -119,3 +119,9 @@ button {
     background-color: #b3b1ad;
   }
 }
+
+.shopping-list {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
