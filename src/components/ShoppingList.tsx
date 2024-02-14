@@ -15,7 +15,6 @@ export default function ShoppingList() {
 
     setItems([...items, inputValue]);
     setInputValue('');
-    console.log(items);
   };
 
   return(
