@@ -30,11 +30,11 @@ export default function ShoppingList() {
           />
           <button type="submit">Add</button>
         </form>
-        <div>
+        <ul>
           {items.map((item, index) => (
-            <ShoppingListItem value={item} listKey={index} />
+            <ShoppingListItem key={index} value={item} />
           ))}
-        </div>
+        </ul>
       </div>
     </>
   );

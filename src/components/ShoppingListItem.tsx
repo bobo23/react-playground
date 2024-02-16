@@ -1,16 +1,14 @@
 
 
 interface ListItemProps {
-    value: string,
-    listKey: number
+    value: string
 }
 
-export default function ShoppingListItem({ value, listKey }: ListItemProps) {
-
+export default function ShoppingListItem({ value }: ListItemProps) {
 
     return (
-        <div className="list-item" key={listKey} >
+        <li>
           {value}
-        </div>
+        </li>
     );
 }
