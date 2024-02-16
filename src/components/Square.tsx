@@ -1,13 +1,13 @@
 import { useState } from 'react';
 
-interface ButtonValue {
+interface ButtonProps {
     value: string,
     onSquareClick: any,
     isX: boolean,
     end: null|string
 }
 
-export default function Square({ value, onSquareClick, isX, end }: ButtonValue) {
+export default function Square({ value, onSquareClick, isX, end }: ButtonProps) {
   const [isHovering, setIsHovering] = useState<boolean>(false);
   const buttonStyle = {
     color: isHovering && !value ? 'grey' : 'black',

@@ -1,4 +1,5 @@
 import { useState, ChangeEvent, FormEvent } from 'react';
+import ShoppingListItem from './ShoppingListItem';
 
 export default function ShoppingList() {
   const [inputValue, setInputValue] = useState<string>('');
@@ -13,7 +14,7 @@ export default function ShoppingList() {
 
     if (!inputValue.trim()) return;
 
-    setItems([...items, inputValue]);
+    setItems([...items, inputValue.trim()]);
     setInputValue('');
   };
 
@@ -29,11 +30,11 @@ export default function ShoppingList() {
           />
           <button type="submit">Add</button>
         </form>
-        <ul>
+        <div>
           {items.map((item, index) => (
-            <li key={index}>{item}</li>
+            <ShoppingListItem value={item} listKey={index} />
           ))}
-      </ul>
+        </div>
       </div>
     </>
   );
