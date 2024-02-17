@@ -75,7 +75,7 @@ h2 {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: #ed7f4c;
+  background: #b798d9;
 }
 
 .list-container {
@@ -83,7 +83,7 @@ h2 {
   flex-direction: column;
   justify-content: center;
   padding: 20px 0 40px 0;
-  width: 300px;
+  width: 400px;
 }
 
 .list-submission {
@@ -137,11 +137,12 @@ h2 {
 }
 
 .list-item {
-  font-size: 1.3rem;
+  font-size: 1.2rem;
   height: 30px;
   padding: 10px;
   text-align: center;
   color: #fff;
+  font-weight: bold;
 }
 
 .list-item:nth-child(odd) {
@@ -155,14 +156,14 @@ h2 {
 .list-item__delete-btn {
   cursor: pointer;
   float: left;
-  margin: -5px;
-  padding: 5px 9px;
+  padding: 5px;
+  font-size: medium;
 }
 
 .list-item__check-btn {
   cursor: pointer;
   float: right;
-  margin: -5px;
+  margin: -4px;
   padding: 4px 8px;
   color: #65e034;
 }
