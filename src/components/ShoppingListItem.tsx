@@ -10,7 +10,7 @@ export default function ShoppingListItem({ value }: ListItemProps) {
         <li className="list-item">
           <a className="list-item__delete-btn">❌</a>
             {value}
-          <a className="list-item__check-btn">✔️</a>
+          <a className="list-item__check-btn">✔</a>
         </li>
     );
 }

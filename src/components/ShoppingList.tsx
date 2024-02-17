@@ -34,7 +34,7 @@ export default function ShoppingList() {
             <span>Add</span>
           </button>
         </form>
-        <ul>
+        <ul className="list">
           {items.map((item, index) => (
             <ShoppingListItem key={index} value={item} />
           ))}
