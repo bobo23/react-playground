@@ -23,7 +23,10 @@ export default function ShoppingList() {
   }
 
   function handleDeleteClick(index: number) {
-    console.log('dough: ', index);
+    const copy = items.slice();
+
+    copy.splice(index, 1);
+    setItems(copy);
   }
 
   return(
