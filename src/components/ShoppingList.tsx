@@ -30,7 +30,9 @@ export default function ShoppingList() {
             placeholder="Produkt hinzufügen..."
             onChange={handleChange}
           />
-          <button className="list-submission__btn" type="submit">Add</button>
+          <button className="list-submission__btn" type="submit">
+            <span>Add</span>
+          </button>
         </form>
         <ul>
           {items.map((item, index) => (
