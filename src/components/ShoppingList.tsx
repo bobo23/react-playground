@@ -19,23 +19,23 @@ export default function ShoppingList() {
   };
 
   return(
-    <>
-      <div className='shopping-list'>
-        <h2>Shopping List</h2>
-        <form onSubmit={handleSubmit}>
-          <input
-            type="text"
-            value={inputValue}
-            onChange={handleChange}
-          />
-          <button type="submit">Add</button>
-        </form>
-        <ul>
-          {items.map((item, index) => (
-            <ShoppingListItem key={index} value={item} />
-          ))}
-        </ul>
-      </div>
-    </>
+    <div className="shopping-list">
+      <h2>Shopping List</h2>
+      <form className="list-submission" onSubmit={handleSubmit}>
+        <input
+          className="list-submission__input"
+          type="text"
+          value={inputValue}
+          placeholder="Produkt hinzufügen..."
+          onChange={handleChange}
+        />
+        <button className="list-submission__btn" type="submit">Add</button>
+      </form>
+      <ul>
+        {items.map((item, index) => (
+          <ShoppingListItem key={index} value={item} />
+        ))}
+      </ul>
+    </div>
   );
 }

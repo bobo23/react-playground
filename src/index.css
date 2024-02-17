@@ -24,7 +24,6 @@ a:hover {
 
 body {
   margin: 0;
-  padding: 20px;
   display: flex;
   place-items: center;
   justify-content: center;
@@ -64,64 +63,3 @@ button {
   }
 }
 
-.app {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.feature {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 10px;
-}
-
-.tictactoe {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.board {
-  padding: 10px 20px;
-}
-
-.board-row {
-  display: flex;
-  justify-content: center;
-}
-
-.square {
-  height: 44px;
-  width: 44px;
-  margin-right: -1px;
-  margin-top: -1px;
-  float: left;
-}
-
-.status {
-  padding: 10px 20px;
-  display: flex;
-  justify-content: center;
-}
-
-.reset {
-  padding: 10px 20px;
-  display: flex;
-  justify-content: center;
-
-  button {
-    width: 80%;
-    padding: 5px 0px;
-  }
-  button:hover {
-    background-color: #b3b1ad;
-  }
-}
-
-.shopping-list {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}

@@ -1,5 +1,6 @@
 import TicTacToe from './components/TicTacToe';
 import ShoppingList from './components/ShoppingList';
+import './App.css';
 
 export default function App() {
   return (
