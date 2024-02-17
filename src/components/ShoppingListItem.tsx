@@ -1,16 +1,18 @@
 
 
 interface ListItemProps {
-    value: string
+    value: string,
+    onCheckClick: any,
+    onDeleteClick: any
 }
 
-export default function ShoppingListItem({ value }: ListItemProps) {
+export default function ShoppingListItem({ value, onCheckClick, onDeleteClick }: ListItemProps) {
 
     return (
         <li className="list-item">
-          <a className="list-item__delete-btn">❌</a>
+          <a className="list-item__delete-btn" onClick={onDeleteClick}>❌</a>
             {value}
-          <a className="list-item__check-btn">✔</a>
+          <a className="list-item__check-btn" onClick={onCheckClick}>✔</a>
         </li>
     );
 }

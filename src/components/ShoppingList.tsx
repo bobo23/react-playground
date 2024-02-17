@@ -18,6 +18,14 @@ export default function ShoppingList() {
     setInputValue('');
   };
 
+  function handleCheckClick(index: number) {
+    console.log('bla: ', index);
+  }
+
+  function handleDeleteClick(index: number) {
+    console.log('dough: ', index);
+  }
+
   return(
     <div className="shopping-list">
       <h2>Shopping List</h2>
@@ -31,12 +39,17 @@ export default function ShoppingList() {
             onChange={handleChange}
           />
           <button className="list-submission__btn" type="submit">
-            <span>Add</span>
+            <span>➕</span>
           </button>
         </form>
         <ul className="list">
           {items.map((item, index) => (
-            <ShoppingListItem key={index} value={item} />
+            <ShoppingListItem
+              key={index}
+              value={item}
+              onCheckClick={() => handleCheckClick(index)}
+              onDeleteClick={() => handleDeleteClick(index)}
+            />
           ))}
         </ul>
       </div>
