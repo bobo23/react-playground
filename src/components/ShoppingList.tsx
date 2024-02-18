@@ -1,28 +1,40 @@
 import { useState, ChangeEvent, FormEvent } from 'react';
 import ShoppingListItem from './ShoppingListItem';
 
+interface Items {
+  value: string,
+  checked: boolean
+}
+
 export default function ShoppingList() {
   const [inputValue, setInputValue] = useState<string>('');
-  const [items, setItems] = useState<string[]>([]);
+  const [items, setItems] = useState<Items[]>([]);
 
-  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
     setInputValue(event.target.value);
   };
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (event: FormEvent<HTMLFormElement>): void => {
     event.preventDefault(); // Verhindere das Neuladen der Seite
 
     if (!inputValue.trim()) return;
 
-    setItems([...items, inputValue.trim()]);
+    setItems([...items, { value: inputValue.trim(), checked: false } as Items]);
     setInputValue('');
   };
 
-  function handleCheckClick(index: number) {
-    console.log('bla: ', index);
+  const handleCheckClick = (index: number): void => {
+    const copy = items.slice();
+
+    copy[index].checked = !copy[index].checked;
+  
+    const uncheckedItems = copy.filter(item => !item.checked);
+    const checkedItems = copy.filter(item => item.checked);
+
+    setItems([...uncheckedItems, ...checkedItems]);
   }
 
-  function handleDeleteClick(index: number) {
+  const handleDeleteClick = (index: number): void => {
     const copy = items.slice();
 
     copy.splice(index, 1);
@@ -42,14 +54,15 @@ export default function ShoppingList() {
             onChange={handleChange}
           />
           <button className="list-submission__btn" type="submit">
-            <span>➕</span>
+            <span>+</span>
           </button>
         </form>
         <ul className="list">
           {items.map((item, index) => (
             <ShoppingListItem
               key={index}
-              value={item}
+              value={item.value}
+              checked={item.checked}
               onCheckClick={() => handleCheckClick(index)}
               onDeleteClick={() => handleDeleteClick(index)}
             />

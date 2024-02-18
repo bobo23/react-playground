@@ -87,6 +87,7 @@ h2 {
 }
 
 .list-submission {
+  height: 46px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -110,20 +111,28 @@ h2 {
 }
 
 .list-submission__btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 46px;
   width: 27%;
+  line-height: 46px;
   padding: 8px;
-  background: #a1cfa7;
+  background-color: #e7f56c;
   border: none;
   border-radius: 3px;
-  font-size: 1.3rem;
+  font-size: 1.8rem;
+  font-weight: bold;
   transition: all 200ms;
 
   &:hover {
-    background-color: #437d38;
+    background-color: #cee317;
+    font-size: 2.3rem;
   }
 
   span {
-    color: #fff;
+    line-height: 1;
+    color: #4c4d4b;
   }
 }
 
