@@ -150,6 +150,12 @@ h2 {
   background: #4527A0;
 }
 
+.list-item.list-item-checked {
+  background: #D1C4E9;
+  color: rgba(0, 0, 0, 0.38);
+  text-decoration: line-through;
+}
+
 .list-item__delete-btn {
   cursor: pointer;
   float: left;
