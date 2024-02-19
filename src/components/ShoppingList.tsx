@@ -2,8 +2,8 @@ import { useState, ChangeEvent, FormEvent } from 'react';
 import ShoppingListItem from './ShoppingListItem';
 
 interface Items {
-  value: string,
-  checked: boolean
+  value: string;
+  isChecked: boolean;
 }
 
 export default function ShoppingList() {
@@ -19,17 +19,17 @@ export default function ShoppingList() {
 
     if (!inputValue.trim()) return;
 
-    setItems([...items, { value: inputValue.trim(), checked: false } as Items]);
+    setItems([...items, { value: inputValue.trim(), isChecked: false } as Items]);
     setInputValue('');
   };
 
   const handleCheckClick = (index: number): void => {
     const copy = items.slice();
 
-    copy[index].checked = !copy[index].checked;
+    copy[index].isChecked = !copy[index].isChecked;
   
-    const uncheckedItems = copy.filter(item => !item.checked);
-    const checkedItems = copy.filter(item => item.checked);
+    const uncheckedItems = copy.filter(item => !item.isChecked);
+    const checkedItems = copy.filter(item => item.isChecked);
 
     setItems([...uncheckedItems, ...checkedItems]);
   }
@@ -62,7 +62,7 @@ export default function ShoppingList() {
             <ShoppingListItem
               key={index}
               value={item.value}
-              checked={item.checked}
+              isChecked={item.isChecked}
               onCheckClick={() => handleCheckClick(index)}
               onDeleteClick={() => handleDeleteClick(index)}
             />

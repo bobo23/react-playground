@@ -1,10 +1,10 @@
 import { useState } from 'react';
 
 interface ButtonProps {
-    value: string,
-    onSquareClick: any,
-    isX: boolean,
-    end: null|string
+    value: string;
+    isX: boolean;
+    end: null|string;
+    onSquareClick: () => void;
 }
 
 export default function Square({ value, onSquareClick, isX, end }: ButtonProps) {
