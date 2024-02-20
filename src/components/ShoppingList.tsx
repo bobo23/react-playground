@@ -30,10 +30,9 @@ export default function ShoppingList() {
 
     copy[index].isChecked = !copy[index].isChecked;
   
-    const uncheckedItems = copy.filter(item => !item.isChecked);
-    const checkedItems = copy.filter(item => item.isChecked);
+    const sortedItems = sortItems(copy);
 
-    setItems([...uncheckedItems, ...checkedItems]);
+    setItems(sortedItems);
   }
 
   const handleDeleteClick = (index: number): void => {
@@ -57,13 +56,22 @@ export default function ShoppingList() {
   
     const itemsCopy = [...items];
     const draggedItem = itemsCopy[draggedItemIndex];
-    itemsCopy.splice(draggedItemIndex, 1); // Entferne das gezogene Element
-    itemsCopy.splice(dragOverItemIndex, 0, draggedItem); // Füge es an der neuen Position ein
+    itemsCopy.splice(draggedItemIndex, 1);
+    itemsCopy.splice(dragOverItemIndex, 0, draggedItem);
   
-    setItems(itemsCopy);
+    const sortedItems = sortItems(itemsCopy);
+
+    setItems(sortedItems);
     setDraggedItemIndex(null); // Reset
     setDragOverItemIndex(null); // Reset
   };
+
+  const sortItems = (items: Items[]) => {
+    const uncheckedItems = items.filter(item => !item.isChecked);
+    const checkedItems = items.filter(item => item.isChecked);
+
+    return [...uncheckedItems, ...checkedItems];
+  }
 
   return(
     <div className="shopping-list">
