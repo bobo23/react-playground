@@ -1,7 +1,9 @@
-import { useState, ChangeEvent, FormEvent, DragEvent } from 'react';
+import { useState, ChangeEvent, FormEvent } from 'react';
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import ShoppingListItem from './ShoppingListItem';
 
 interface Items {
+  itemId: string;
   value: string;
   isChecked: boolean;
 }
@@ -9,8 +11,6 @@ interface Items {
 export default function ShoppingList() {
   const [inputValue, setInputValue] = useState<string>('');
   const [items, setItems] = useState<Items[]>([]);
-  const [draggedItemIndex, setDraggedItemIndex] = useState<number | null>(null);
-  const [dragOverItemIndex, setDragOverItemIndex] = useState<number | null>(null);
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
     setInputValue(event.target.value);
@@ -21,12 +21,12 @@ export default function ShoppingList() {
 
     if (!inputValue.trim()) return;
 
-    setItems([...items, { value: inputValue.trim(), isChecked: false } as Items]);
+    setItems([...items, { itemId: `id-${new Date().getTime()}`, value: inputValue.trim(), isChecked: false } as Items]);
     setInputValue('');
   };
 
   const handleCheckClick = (index: number): void => {
-    const copy = items.slice();
+    const copy = [...items];
 
     copy[index].isChecked = !copy[index].isChecked;
   
@@ -36,34 +36,30 @@ export default function ShoppingList() {
   }
 
   const handleDeleteClick = (index: number): void => {
-    const copy = items.slice();
+    const copy = [...items];
 
     copy.splice(index, 1);
     setItems(copy);
   }
 
-  const handleDragStart = (index: number): void => {
-    setDraggedItemIndex(index);
-  };
+  const onDragEnd = (result: { source: { index: number }, destination: { index: number } }) => {
+    const { source, destination } = result;
   
-  const handleDragOver = (event: DragEvent<HTMLLIElement>, index: number): void => {
-    event.preventDefault();
-    setDragOverItemIndex(index);
-  };
-
-  const handleDrop = (): void => {
-    if (draggedItemIndex === null || dragOverItemIndex === null) return;
+    if (!destination) return;
   
     const itemsCopy = [...items];
-    const draggedItem = itemsCopy[draggedItemIndex];
-    itemsCopy.splice(draggedItemIndex, 1);
-    itemsCopy.splice(dragOverItemIndex, 0, draggedItem);
+    const sourceItem = itemsCopy[source.index];
   
-    const sortedItems = sortItems(itemsCopy);
-
-    setItems(sortedItems);
-    setDraggedItemIndex(null); // Reset
-    setDragOverItemIndex(null); // Reset
+    // Logik, um zu verhindern, dass Items zwischen bestimmten Bereichen bewegt werden
+    // Zum Beispiel, indem du prüfst, ob das Ziel ein Bereich für gecheckte Items ist und das gezogene Item ungecheckt ist
+    if (sourceItem.isChecked) {
+      // Implementiere Logik, wenn nötig
+    }
+  
+    itemsCopy.splice(source.index, 1);
+    itemsCopy.splice(destination.index, 0, sourceItem);
+  
+    setItems(itemsCopy);
   };
 
   const sortItems = (items: Items[]) => {
@@ -74,35 +70,50 @@ export default function ShoppingList() {
   }
 
   return(
-    <div className="shopping-list">
-      <h2>Shopping List</h2>
-      <div className="list-container">
-        <form className="list-submission" onSubmit={handleSubmit}>
-          <input
-            className="list-submission__input"
-            type="text"
-            value={inputValue}
-            placeholder="Produkt hinzufügen..."
-            onChange={handleChange}
-          />
-          <button className="list-submission__btn" type="submit">
-            <span>+</span>
-          </button>
-        </form>
-        <ul className="list" onDrop={handleDrop}>
-          {items.map((item, index) => (
-            <ShoppingListItem
-              key={index}
-              value={item.value}
-              isChecked={item.isChecked}
-              onCheckClick={() => handleCheckClick(index)}
-              onDeleteClick={() => handleDeleteClick(index)}
-              onDragStart={() => handleDragStart(index)}
-              onDragOver={(event: DragEvent<HTMLLIElement>) => handleDragOver(event, index)}
+    <DragDropContext onDragEnd={onDragEnd}>
+      <div className="shopping-list">
+        <h2>Shopping List</h2>
+        <div className="list-container">
+          <form className="list-submission" onSubmit={handleSubmit}>
+            <input
+              className="list-submission__input"
+              type="text"
+              value={inputValue}
+              placeholder="Produkt hinzufügen..."
+              onChange={handleChange}
             />
-          ))}
-        </ul>
+            <button className="list-submission__btn" type="submit">
+              <span>+</span>
+            </button>
+          </form>
+          <Droppable droppableId="droppable-shopping-list">
+            {(provided) => (
+              <ul className="list" {...provided.droppableProps} ref={provided.innerRef}>
+                {items.map((item, index) => (
+                  <Draggable key={item.itemId} draggableId={item.itemId} index={index}  isDragDisabled={item.isChecked}>
+                    <div
+                      ref={provided.innerRef}
+                      {...provided.draggableProps}
+                      {...provided.dragHandleProps}
+                      // Anwenden bedingter Styling-Logik basierend auf `snapshot.isDragging` und `item.isChecked`
+                    >
+                      <ShoppingListItem
+                        key={index}
+                        value={item.value}
+                        isChecked={item.isChecked}
+                        onCheckClick={() => handleCheckClick(index)}
+                        onDeleteClick={() => handleDeleteClick(index)}
+                      />
+                    </div>
+                  </Draggable>
+                ))}
+                {provided.placeholder}
+              </ul>
+            )}
+          </Droppable>
+        </div>
       </div>
-    </div>
+    </DragDropContext>
+    
   );
 }
