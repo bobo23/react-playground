@@ -1,5 +1,5 @@
 import { useState, ChangeEvent, FormEvent } from 'react';
-import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+import { DragDropContext, Droppable, Draggable, DropResult, ResponderProvided } from 'react-beautiful-dnd';
 import ShoppingListItem from './ShoppingListItem';
 
 interface Items {
@@ -42,7 +42,7 @@ export default function ShoppingList() {
     setItems(copy);
   }
 
-  const onDragEnd = (result: { source: { index: number }, destination: { index: number } }) => {
+  const onDragEnd = (result: DropResult) => {
     const { source, destination } = result;
   
     if (!destination) return;
@@ -91,11 +91,11 @@ export default function ShoppingList() {
               <ul className="list" {...provided.droppableProps} ref={provided.innerRef}>
                 {items.map((item, index) => (
                   <Draggable key={item.itemId} draggableId={item.itemId} index={index}  isDragDisabled={item.isChecked}>
-                    <div
+                    {(provided, snapshot) => (
+                      <div
                       ref={provided.innerRef}
                       {...provided.draggableProps}
                       {...provided.dragHandleProps}
-                      // Anwenden bedingter Styling-Logik basierend auf `snapshot.isDragging` und `item.isChecked`
                     >
                       <ShoppingListItem
                         key={index}
@@ -105,6 +105,7 @@ export default function ShoppingList() {
                         onDeleteClick={() => handleDeleteClick(index)}
                       />
                     </div>
+                    )}
                   </Draggable>
                 ))}
                 {provided.placeholder}
@@ -114,6 +115,5 @@ export default function ShoppingList() {
         </div>
       </div>
     </DragDropContext>
-    
   );
 }
