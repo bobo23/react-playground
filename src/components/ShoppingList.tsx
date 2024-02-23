@@ -49,18 +49,17 @@ export default function ShoppingList() {
   
     const itemsCopy = [...items];
     const sourceItem = itemsCopy[source.index];
-    console.log(sourceItem.itemId, sourceItem.value, sourceItem.isChecked);
-    // Logik, um zu verhindern, dass Items zwischen bestimmten Bereichen bewegt werden
-    // Zum Beispiel, indem du prüfst, ob das Ziel ein Bereich für gecheckte Items ist und das gezogene Item ungecheckt ist
-    if (sourceItem.isChecked) {
-      // Implementiere Logik, wenn nötig
+    const destinationIndex = destination.index;
+    const lastUncheckedIndex = itemsCopy.reduce((acc, item, index) => !item.isChecked ? index : acc, -1);
+    
+    if (!sourceItem.isChecked && destinationIndex >= lastUncheckedIndex + 1) {
+      return;
     }
   
     itemsCopy.splice(source.index, 1);
     itemsCopy.splice(destination.index, 0, sourceItem);
   
-    const sortedItems = sortItems(itemsCopy);
-    setItems(sortedItems);
+    setItems(itemsCopy);
   };
 
   const sortItems = (items: Items[]) => {
