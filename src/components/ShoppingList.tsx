@@ -1,5 +1,5 @@
 import { useState, ChangeEvent, FormEvent } from 'react';
-import { DragDropContext, Droppable, Draggable, DropResult, ResponderProvided } from 'react-beautiful-dnd';
+import { DragDropContext, Droppable, Draggable, DropResult } from 'react-beautiful-dnd';
 import ShoppingListItem from './ShoppingListItem';
 
 interface Items {
@@ -49,7 +49,7 @@ export default function ShoppingList() {
   
     const itemsCopy = [...items];
     const sourceItem = itemsCopy[source.index];
-  
+    console.log(sourceItem.itemId, sourceItem.value, sourceItem.isChecked);
     // Logik, um zu verhindern, dass Items zwischen bestimmten Bereichen bewegt werden
     // Zum Beispiel, indem du prüfst, ob das Ziel ein Bereich für gecheckte Items ist und das gezogene Item ungecheckt ist
     if (sourceItem.isChecked) {
@@ -70,41 +70,36 @@ export default function ShoppingList() {
   }
 
   return(
-    <DragDropContext onDragEnd={onDragEnd}>
-      <div className="shopping-list">
-        <h2>Shopping List</h2>
-        <div className="list-container">
-          <form className="list-submission" onSubmit={handleSubmit}>
-            <input
-              className="list-submission__input"
-              type="text"
-              value={inputValue}
-              placeholder="Produkt hinzufügen..."
-              onChange={handleChange}
-            />
-            <button className="list-submission__btn" type="submit">
-              <span>+</span>
-            </button>
-          </form>
+    <div className="shopping-list">
+      <h2>Shopping List</h2>
+      <div className="list-container">
+        <form className="list-submission" onSubmit={handleSubmit}>
+          <input
+            className="list-submission__input"
+            type="text"
+            value={inputValue}
+            placeholder="Produkt hinzufügen..."
+            onChange={handleChange}
+          />
+          <button className="list-submission__btn" type="submit"> 
+            <span>+</span>
+          </button>
+        </form>
+        <DragDropContext onDragEnd={onDragEnd}>
           <Droppable droppableId="droppable-shopping-list">
             {(provided) => (
               <ul className="list" {...provided.droppableProps} ref={provided.innerRef}>
                 {items.map((item, index) => (
-                  <Draggable key={item.itemId} draggableId={item.itemId} index={index}  isDragDisabled={item.isChecked}>
-                    {(provided, snapshot) => (
-                      <div
-                      ref={provided.innerRef}
-                      {...provided.draggableProps}
-                      {...provided.dragHandleProps}
-                    >
+                  <Draggable key={item.itemId} draggableId={item.itemId} index={index} isDragDisabled={item.isChecked}>
+                    {(provided) => (
                       <ShoppingListItem
                         key={index}
                         value={item.value}
                         isChecked={item.isChecked}
                         onCheckClick={() => handleCheckClick(index)}
                         onDeleteClick={() => handleDeleteClick(index)}
+                        provided={provided}
                       />
-                    </div>
                     )}
                   </Draggable>
                 ))}
@@ -112,8 +107,8 @@ export default function ShoppingList() {
               </ul>
             )}
           </Droppable>
-        </div>
+        </DragDropContext>
       </div>
-    </DragDropContext>
+    </div>
   );
 }
