@@ -59,7 +59,8 @@ export default function ShoppingList() {
     itemsCopy.splice(source.index, 1);
     itemsCopy.splice(destination.index, 0, sourceItem);
   
-    setItems(itemsCopy);
+    const sortedItems = sortItems(itemsCopy);
+    setItems(sortedItems);
   };
 
   const sortItems = (items: Items[]) => {
