@@ -51,6 +51,7 @@ h2 {
   padding: 10px 20px;
   display: flex;
   justify-content: center;
+  font-weight: bold;
 }
 
 .reset {
@@ -59,7 +60,7 @@ h2 {
   justify-content: center;
 
   button {
-    width: 80%;
+    width: 120px;
     padding: 5px 0px;
   }
 
@@ -180,4 +181,15 @@ h2 {
   margin: -4px;
   padding: 4px 8px;
   color: #65e034;
+}
+
+/* ---------- Cards --------- */
+
+.memory {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px 0;
+  background: #e8dbda;
 }
