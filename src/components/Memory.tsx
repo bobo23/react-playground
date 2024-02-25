@@ -14,45 +14,41 @@ export default function Memory() {
   const [cards, setCards] = useState<Card[]>(loadedCards);
   const [isSecondFlip , setIsSecondFlip] = useState<boolean>(false);
   const [firstFlippedCardIndex, setFirstFlippedCardIndex] = useState<number | null>(null);
-  const [secondFlippedCardIndex, setSecondFlippedCardIndex] = useState<number | null>(null);
   const [points, setPoints] = useState<number>(0);
 
   function handleCardClick(cardId: number) {
     const cardsCopy = [...cards];
     const clickedCardIndex = cardsCopy.findIndex((card) => card.cardId === cardId);
 
-    if (!clickedCardIndex || cards[clickedCardIndex].isFlipped || cards[clickedCardIndex].isMatched) {
+    if (cardsCopy[clickedCardIndex].isFlipped || cardsCopy[clickedCardIndex].isMatched) {
       return;
     }
 
     cardsCopy[clickedCardIndex].isFlipped = true;
 
     if (isSecondFlip) {
-      setSecondFlippedCardIndex(clickedCardIndex);
-      checkIfCardsMatch(cardsCopy);
+      checkIfCardsMatch(cardsCopy, clickedCardIndex);
       return;
     }
-    console.log('after first flip: ', cardsCopy);
+    
     setFirstFlippedCardIndex(clickedCardIndex);
     setIsSecondFlip(true);
     setCards(cardsCopy);
   }
 
-  function checkIfCardsMatch(cardsCopy: Card[]) {
-    if (cardsCopy[firstFlippedCardIndex!].image === cardsCopy[secondFlippedCardIndex!].image) {
+  function checkIfCardsMatch(cardsCopy: Card[], secondFlippedCardIndex: number) {
+    if (cardsCopy[firstFlippedCardIndex!].image === cardsCopy[secondFlippedCardIndex].image) {
       cardsCopy[firstFlippedCardIndex!].isMatched = true;
-      cardsCopy[secondFlippedCardIndex!].isMatched = true;
+      cardsCopy[secondFlippedCardIndex].isMatched = true;
 
       setPoints(points + 1);
-      console.log('after match: ', cardsCopy, points);
     } else {
       cardsCopy[firstFlippedCardIndex!].isFlipped = false;
-      cardsCopy[secondFlippedCardIndex!].isFlipped = false;
+      cardsCopy[secondFlippedCardIndex].isFlipped = false;
     }
 
     setIsSecondFlip(false);
     setCards(cardsCopy);
-    console.log('after second flip: ', cardsCopy)
   }
 
   return (
