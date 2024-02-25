@@ -12,21 +12,14 @@ export default function MemoryCard({
   isMatched
 }: MemoryCardProps) {
   return (
-    <div className="memory__card">
-      <div className="memory__card__inner" onClick={onCardClick}>
-        {(isFlipped && !isMatched) && (
-          <div className="memory__card__back">
-            <img src={image} alt="memory card" />
-          </div>
-        )}
-        {isMatched && (
-          <div className="memory__card__back__matched">
-            <img src={image} alt="memory card" />
-          </div>
-        )}
-        {(!isFlipped && !isMatched) && (
-          <div className="memory__card__front">?</div>
-        )}
+    <div className={`memory-card ${isFlipped ? 'flipped' : ''} ${isMatched ? 'matched' : ''}`}>
+      <div className="memory-card-inner" onClick={onCardClick}>
+        <div className="memory-card-front">
+          <img src="./src/assets/memory/nfl.webp"/>
+        </div>
+        <div className="memory-card-back">
+          <img src={image}/>
+        </div>
       </div>
     </div>
   );

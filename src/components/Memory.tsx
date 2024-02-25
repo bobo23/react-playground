@@ -13,6 +13,7 @@ export default function Memory() {
   const loadedCards = memoryCards(16);
   const [cards, setCards] = useState<Card[]>(loadedCards);
   const [isSecondFlip , setIsSecondFlip] = useState<boolean>(false);
+  const [isCheckingMatch, setIsCheckingMatch] = useState<boolean>(false);
   const [firstFlippedCardIndex, setFirstFlippedCardIndex] = useState<number | null>(null);
   const [points, setPoints] = useState<number>(0);
 
@@ -20,13 +21,14 @@ export default function Memory() {
     const cardsCopy = [...cards];
     const clickedCardIndex = cardsCopy.findIndex((card) => card.cardId === cardId);
 
-    if (cardsCopy[clickedCardIndex].isFlipped || cardsCopy[clickedCardIndex].isMatched) {
+    if (cardsCopy[clickedCardIndex].isFlipped || cardsCopy[clickedCardIndex].isMatched || isCheckingMatch) {
       return;
     }
 
     cardsCopy[clickedCardIndex].isFlipped = true;
 
     if (isSecondFlip) {
+      setIsCheckingMatch(true);
       checkIfCardsMatch(cardsCopy, clickedCardIndex);
       return;
     }
@@ -37,24 +39,37 @@ export default function Memory() {
   }
 
   function checkIfCardsMatch(cardsCopy: Card[], secondFlippedCardIndex: number) {
-    if (cardsCopy[firstFlippedCardIndex!].image === cardsCopy[secondFlippedCardIndex].image) {
-      cardsCopy[firstFlippedCardIndex!].isMatched = true;
-      cardsCopy[secondFlippedCardIndex].isMatched = true;
+    if (firstFlippedCardIndex == null) return;
 
-      setPoints(points + 1);
+    if (cardsCopy[firstFlippedCardIndex].image === cardsCopy[secondFlippedCardIndex].image) {
+      setCards((prevCards) => {
+        const newCards = [...prevCards];
+        newCards[firstFlippedCardIndex].isMatched = true;
+        newCards[secondFlippedCardIndex].isMatched = true;
+        return newCards;
+      });
+
+      setPoints((prevPoints) => prevPoints + 1);
+      setIsCheckingMatch(false);
     } else {
-      cardsCopy[firstFlippedCardIndex!].isFlipped = false;
-      cardsCopy[secondFlippedCardIndex].isFlipped = false;
+      setTimeout(() => {
+        setCards((prevCards) => {
+          const newCards = [...prevCards];
+          newCards[firstFlippedCardIndex].isFlipped = false;
+          newCards[secondFlippedCardIndex].isFlipped = false;
+          return newCards;
+        });
+        setIsCheckingMatch(false);
+      }, 2000);
     }
 
     setIsSecondFlip(false);
-    setCards(cardsCopy);
   }
 
   return (
     <div className="memory">
       <h2>Memory</h2>
-      <div className="memory__board">
+      <div className="memory-board">
         {cards.map((card) => (
           <MemoryCard
             key={card.cardId}

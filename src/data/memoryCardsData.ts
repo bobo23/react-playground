@@ -4,7 +4,7 @@ export default function memoryCards (count: number) {
         isFlipped: false,
         isMatched: false,
         // add every image twice
-        image: `./assets/memory/${Math.floor(index / 2)}.png`
+        image: `./src/assets/memory/${Math.floor(index / 2)}.png`
     }));
 
     return cards.sort(() => Math.random() - 0.5);
