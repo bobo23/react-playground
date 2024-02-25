@@ -201,7 +201,8 @@ h2 {
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: repeat(4, 1fr);
   width: 50%;
-  padding: 5px;
+  padding: 10px;
+  background: #f5f3f2;
 }
 
 .memory__card {
@@ -211,11 +212,17 @@ h2 {
   font-size: 2rem;
   font-weight: bold;
   color: #000;
-  background: #32f157;
-  border: 2px solid #000;
-  cursor: pointer;
   transition: all 200ms;
   aspect-ratio: 1 / 1;
-  margin-right: -1px;
-  margin-top: -1px;
+  padding: 10px;
+}
+
+.memory__card__inner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  background: #32f157;
+  cursor: pointer;
 }

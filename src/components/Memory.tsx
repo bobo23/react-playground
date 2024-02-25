@@ -1,4 +1,4 @@
-
+import MemoryCard from './MemoryCard';
 
 export default function Memory() {
   const cards = [...Array(16).keys()];
@@ -8,11 +8,7 @@ export default function Memory() {
       <h2>Memory</h2>
       <div className="memory__board">
         {cards.map((card) => (
-          <div key={card} className="memory__card">
-            <div className="memory__card__inner">
-              <div className="memory__card__front">?</div>
-            </div>
-          </div>
+          <MemoryCard key={card} />
         ))}
       </div>
     </div>
