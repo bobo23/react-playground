@@ -2,6 +2,8 @@ export default function memoryCards (count: number) {
     const cards = [...Array(count).keys()].map((index) => ({
         cardId: index,
         isFlipped: false,
+        isMatched: false,
+        // add every image twice
         image: `./assets/memory/${Math.floor(index / 2)}.png`
     }));
 
