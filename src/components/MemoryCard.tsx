@@ -14,7 +14,19 @@ export default function MemoryCard({
   return (
     <div className="memory__card">
       <div className="memory__card__inner" onClick={onCardClick}>
-        <div className="memory__card__front">?</div>
+        {(isFlipped && !isMatched) && (
+          <div className="memory__card__back">
+            <img src={image} alt="memory card" />
+          </div>
+        )}
+        {isMatched && (
+          <div className="memory__card__back__matched">
+            <img src={image} alt="memory card" />
+          </div>
+        )}
+        {(!isFlipped && !isMatched) && (
+          <div className="memory__card__front">?</div>
+        )}
       </div>
     </div>
   );
