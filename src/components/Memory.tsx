@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import MemoryCard from './MemoryCard';
 import memoryCards from '../data/memoryCardsData';
 
@@ -16,6 +16,17 @@ export default function Memory() {
   const [isCheckingMatch, setIsCheckingMatch] = useState<boolean>(false);
   const [firstFlippedCardIndex, setFirstFlippedCardIndex] = useState<number | null>(null);
   const [points, setPoints] = useState<number>(0);
+
+  useEffect(() => {
+    const isGameOver = cards.every((card) => card.isMatched);
+
+    if (isGameOver && cards.length > 0) {
+      setTimeout(() => {
+        alert('You won!');
+        resetGame();
+      }, 500);
+    }
+  }, [cards]);
 
   function handleCardClick(cardId: number) {
     const cardsCopy = [...cards];
@@ -64,6 +75,14 @@ export default function Memory() {
     }
 
     setIsSecondFlip(false);
+  }
+
+  function resetGame() {
+    setCards(memoryCards(16));
+    setPoints(0);
+    setIsSecondFlip(false);
+    setIsCheckingMatch(false);
+    setFirstFlippedCardIndex(null);
   }
 
   return (
