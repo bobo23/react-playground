@@ -88,16 +88,22 @@ export default function Memory() {
   return (
     <div className="memory">
       <h2>Memory</h2>
-      <div className="memory-board">
-        {cards.map((card) => (
-          <MemoryCard
-            key={card.cardId}
-            image={card.image}
-            isFlipped={card.isFlipped}
-            isMatched={card.isMatched}
-            onCardClick={() => handleCardClick(card.cardId)}
-          />
-        ))}
+      <div className="memory-container">
+        <div className="memory-info">
+          <p>Points: {points}</p>
+          <button onClick={resetGame}>Reset</button>
+        </div>
+        <div className="memory-board">
+          {cards.map((card) => (
+            <MemoryCard
+              key={card.cardId}
+              image={card.image}
+              isFlipped={card.isFlipped}
+              isMatched={card.isMatched}
+              onCardClick={() => handleCardClick(card.cardId)}
+            />
+          ))}
+        </div>
       </div>
     </div>
   );

@@ -196,6 +196,17 @@ h2 {
   background: #e8dbda;
 }
 
+.memory-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+}
+
+.memory-info {
+  width: 25%;
+}
+
 .memory-board {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
