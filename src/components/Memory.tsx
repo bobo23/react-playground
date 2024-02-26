@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import MemoryCard from './MemoryCard';
 import memoryCards from '../data/memoryCardsData';
+import MemoryStart from './MemoryStart';
 
 interface Card {
   cardId: number;
@@ -12,6 +13,7 @@ interface Card {
 export default function Memory() {
   const loadedCards = memoryCards(16);
   const [cards, setCards] = useState<Card[]>(loadedCards);
+  const [isGameStarted, setIsGameStarted] = useState<boolean>(false);
   const [isSecondFlip , setIsSecondFlip] = useState<boolean>(false);
   const [isCheckingMatch, setIsCheckingMatch] = useState<boolean>(false);
   const [firstFlippedCardIndex, setFirstFlippedCardIndex] = useState<number | null>(null);
@@ -89,21 +91,27 @@ export default function Memory() {
     <div className="memory">
       <h2>Memory</h2>
       <div className="memory-container">
-        <div className="memory-info">
-          <p>Points: {points}</p>
-          <button onClick={resetGame}>Reset</button>
-        </div>
-        <div className="memory-board">
-          {cards.map((card) => (
-            <MemoryCard
-              key={card.cardId}
-              image={card.image}
-              isFlipped={card.isFlipped}
-              isMatched={card.isMatched}
-              onCardClick={() => handleCardClick(card.cardId)}
-            />
-          ))}
-        </div>
+        {!isGameStarted ? (
+          <MemoryStart />
+        ) : (
+          <div>
+            <div className="memory-info">
+              <p>Points: {points}</p>
+              <button onClick={resetGame}>Reset</button>
+            </div>
+            <div className="memory-board">
+              {cards.map((card) => (
+                <MemoryCard
+                  key={card.cardId}
+                  image={card.image}
+                  isFlipped={card.isFlipped}
+                  isMatched={card.isMatched}
+                  onCardClick={() => handleCardClick(card.cardId)}
+                />
+              ))}
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
