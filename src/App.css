@@ -193,7 +193,7 @@ h2 {
   justify-content: center;
   align-items: center;
   padding: 20px 0;
-  background: #e8dbda;
+  background: #f0ebeb;
 }
 
 .memory-container {
@@ -223,6 +223,14 @@ h2 {
       border: none;
       width: 200px;
       text-align: center;
+
+      &:focus {
+        outline: none;
+      }
+    }
+
+    input.memory-error {
+      border: 1px solid red;
     }
 
     button {

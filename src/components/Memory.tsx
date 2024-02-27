@@ -90,6 +90,9 @@ export default function Memory() {
   function resetGame() {
     setCards(memoryCards(16));
     setPoints(0);
+    setIsGameStarted(false);
+    setPlayerOne('');
+    setPlayerTwo('');
     setIsSecondFlip(false);
     setIsCheckingMatch(false);
     setFirstFlippedCardIndex(null);
