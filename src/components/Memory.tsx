@@ -17,6 +17,8 @@ export default function Memory() {
   const [isSecondFlip , setIsSecondFlip] = useState<boolean>(false);
   const [isCheckingMatch, setIsCheckingMatch] = useState<boolean>(false);
   const [firstFlippedCardIndex, setFirstFlippedCardIndex] = useState<number | null>(null);
+  const [playerOne, setPlayerOne] = useState('');
+  const [playerTwo, setPlayerTwo] = useState('');
   const [points, setPoints] = useState<number>(0);
 
   useEffect(() => {
@@ -30,7 +32,9 @@ export default function Memory() {
     }
   }, [cards]);
 
-  function startGame() {
+  function handleStartGame(playerOneName: string, playerTwoName: string) {
+    setPlayerOne(playerOneName);
+    setPlayerTwo(playerTwoName);
     setIsGameStarted(true);
   }
 
@@ -94,29 +98,27 @@ export default function Memory() {
   return (
     <div className="memory">
       <h2>Memory</h2>
-      <div>
-        {!isGameStarted ? (
-          <MemoryStart startGame={() => startGame()}/>
-        ) : (
-          <div className="memory-container">
-            <div className="memory-info">
-              <p>Points: {points}</p>
-              <button onClick={resetGame}>Reset</button>
-            </div>
-            <div className="memory-board">
-              {cards.map((card) => (
-                <MemoryCard
-                  key={card.cardId}
-                  image={card.image}
-                  isFlipped={card.isFlipped}
-                  isMatched={card.isMatched}
-                  onCardClick={() => handleCardClick(card.cardId)}
-                />
-              ))}
-            </div>
+      {!isGameStarted ? (
+        <MemoryStart startGame={handleStartGame}/>
+      ) : (
+        <div className="memory-container">
+          <div className="memory-info">
+            <p>Points: {points}</p>
+            <button onClick={resetGame}>Reset</button>
           </div>
-        )}
-      </div>
+          <div className="memory-board">
+            {cards.map((card) => (
+              <MemoryCard
+                key={card.cardId}
+                image={card.image}
+                isFlipped={card.isFlipped}
+                isMatched={card.isMatched}
+                onCardClick={() => handleCardClick(card.cardId)}
+              />
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   );
 }
