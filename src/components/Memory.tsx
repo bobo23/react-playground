@@ -30,6 +30,10 @@ export default function Memory() {
     }
   }, [cards]);
 
+  function startGame() {
+    setIsGameStarted(true);
+  }
+
   function handleCardClick(cardId: number) {
     const cardsCopy = [...cards];
     const clickedCardIndex = cardsCopy.findIndex((card) => card.cardId === cardId);
@@ -90,11 +94,11 @@ export default function Memory() {
   return (
     <div className="memory">
       <h2>Memory</h2>
-      <div className="memory-container">
+      <div>
         {!isGameStarted ? (
-          <MemoryStart />
+          <MemoryStart startGame={() => startGame()}/>
         ) : (
-          <div>
+          <div className="memory-container">
             <div className="memory-info">
               <p>Points: {points}</p>
               <button onClick={resetGame}>Reset</button>

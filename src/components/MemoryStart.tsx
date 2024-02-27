@@ -1,9 +1,16 @@
+interface MemoryStartProps {
+  startGame: () => void;
+}
 
-
-export default function MemoryStart() {
+export default function MemoryStart({ startGame }: MemoryStartProps) {
   return (
     <div className="memory-start">
-      <p>Click on a card to flip it. Try to find a match!</p>
+      <p>Start a new game!</p>
+      <form>
+        <input type="text" placeholder="Player 1" />
+        <input type="text" placeholder="Player 2" />
+        <button type="submit" onClick={startGame}>Start</button>
+      </form>
     </div>
   );
 }
