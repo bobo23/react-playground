@@ -15,16 +15,15 @@ export default function MemoryStart({ startGame }: MemoryStartProps) {
 
     if (!playerOne) {
       setIsErrorPlayerOne(true);
+      return;
     } else {
       setIsErrorPlayerOne(false);
     }
     if (!playerTwo) {
       setIsErrorPlayerTwo(true);
+      return;
     } else {
       setIsErrorPlayerTwo(false);
-    }
-    if (!playerOne || !playerTwo) {
-      return;
     }
 
     startGame(playerOne, playerTwo);

@@ -19,7 +19,8 @@ export default function Memory() {
   const [firstFlippedCardIndex, setFirstFlippedCardIndex] = useState<number | null>(null);
   const [playerOne, setPlayerOne] = useState('');
   const [playerTwo, setPlayerTwo] = useState('');
-  const [points, setPoints] = useState<number>(0);
+  const [playerOnePoints, setPlayerOnePoints] = useState<number>(0);
+  const [playerTwoPoints, setPlayerTwoPoints] = useState<number>(0);
 
   useEffect(() => {
     const isGameOver = cards.every((card) => card.isMatched);
@@ -70,7 +71,7 @@ export default function Memory() {
         return newCards;
       });
 
-      setPoints((prevPoints) => prevPoints + 1);
+      setPlayerOnePoints((prevPoints) => prevPoints + 1);
       setIsCheckingMatch(false);
     } else {
       setTimeout(() => {
@@ -89,7 +90,8 @@ export default function Memory() {
 
   function resetGame() {
     setCards(memoryCards(16));
-    setPoints(0);
+    setPlayerOnePoints(0);
+    setPlayerTwoPoints(0);
     setIsGameStarted(false);
     setPlayerOne('');
     setPlayerTwo('');
@@ -106,7 +108,8 @@ export default function Memory() {
       ) : (
         <div className="memory-container">
           <div className="memory-info">
-            <p>Points: {points}</p>
+            <p>{playerOne}: <span>{playerOnePoints}</span></p>
+            <p>{playerTwo}: <span>{playerTwoPoints}</span></p>
             <button onClick={resetGame}>Reset</button>
           </div>
           <div className="memory-board">
