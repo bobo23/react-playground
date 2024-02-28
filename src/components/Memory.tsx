@@ -21,6 +21,7 @@ export default function Memory() {
   const [playerTwo, setPlayerTwo] = useState('');
   const [playerOnePoints, setPlayerOnePoints] = useState<number>(0);
   const [playerTwoPoints, setPlayerTwoPoints] = useState<number>(0);
+  const [isPlayerOneTurn, setIsPlayerOneTurn] = useState<boolean>(true);
 
   useEffect(() => {
     const isGameOver = cards.every((card) => card.isMatched);
@@ -108,8 +109,8 @@ export default function Memory() {
       ) : (
         <div className="memory-container">
           <div className="memory-info">
-            <p>{playerOne}: <span>{playerOnePoints}</span></p>
-            <p>{playerTwo}: <span>{playerTwoPoints}</span></p>
+            <p>{playerOne}: <span>{playerOnePoints}</span> point{playerOnePoints === 0 || playerOnePoints > 1 ? 's' : ''}</p>
+            <p>{playerTwo}: <span>{playerTwoPoints}</span> point{playerTwoPoints === 0 || playerTwoPoints > 1 ? 's' : ''}</p>
             <button onClick={resetGame}>Reset</button>
           </div>
           <div className="memory-board">

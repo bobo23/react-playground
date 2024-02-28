@@ -3,6 +3,7 @@ export default function memoryCards (count: number) {
         cardId: index,
         isFlipped: false,
         isMatched: false,
+        ownedBy: null,
         // add every image twice
         image: `./src/assets/memory/${Math.floor(index / 2)}.png`
     }));

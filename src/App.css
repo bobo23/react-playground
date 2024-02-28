@@ -185,7 +185,7 @@ h2 {
   color: #65e034;
 }
 
-/* ---------- Cards --------- */
+/* -------- Memory Style -------- */
 
 .memory {
   display: flex;
@@ -251,6 +251,11 @@ h2 {
 
 .memory-info {
   width: 25%;
+
+  span {
+    font-weight: bold;
+    color: #4ad94a;
+  }
 }
 
 .memory-board {
