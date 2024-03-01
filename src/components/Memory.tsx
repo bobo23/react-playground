@@ -6,8 +6,8 @@ import MemoryStart from './MemoryStart';
 interface Card {
   cardId: number;
   isFlipped: boolean;
-  isMatched: boolean;
   image: string;
+  ownedBy: string | undefined;
 }
 
 export default function Memory() {
@@ -24,7 +24,7 @@ export default function Memory() {
   const [isPlayerOneTurn, setIsPlayerOneTurn] = useState<boolean>(true);
 
   useEffect(() => {
-    const isGameOver = cards.every((card) => card.isMatched);
+    const isGameOver = cards.every((card) => card.ownedBy !== undefined);
 
     if (isGameOver && cards.length > 0) {
       setTimeout(() => {
@@ -44,7 +44,7 @@ export default function Memory() {
     const cardsCopy = [...cards];
     const clickedCardIndex = cardsCopy.findIndex((card) => card.cardId === cardId);
 
-    if (cardsCopy[clickedCardIndex].isFlipped || cardsCopy[clickedCardIndex].isMatched || isCheckingMatch) {
+    if (cardsCopy[clickedCardIndex].isFlipped || cardsCopy[clickedCardIndex].ownedBy || isCheckingMatch) {
       return;
     }
 
@@ -67,12 +67,14 @@ export default function Memory() {
     if (cardsCopy[firstFlippedCardIndex].image === cardsCopy[secondFlippedCardIndex].image) {
       setCards((prevCards) => {
         const newCards = [...prevCards];
-        newCards[firstFlippedCardIndex].isMatched = true;
-        newCards[secondFlippedCardIndex].isMatched = true;
+        newCards[firstFlippedCardIndex].ownedBy = isPlayerOneTurn ? 'player-one' : 'player-two';
+        newCards[secondFlippedCardIndex].ownedBy = isPlayerOneTurn ? 'player-one' : 'player-two';
         return newCards;
       });
 
-      setPlayerOnePoints((prevPoints) => prevPoints + 1);
+      if (isPlayerOneTurn) setPlayerOnePoints((prevPoints) => prevPoints + 1);
+      else setPlayerTwoPoints((prevPoints) => prevPoints + 1);
+      
       setIsCheckingMatch(false);
     } else {
       setTimeout(() => {
@@ -82,6 +84,8 @@ export default function Memory() {
           newCards[secondFlippedCardIndex].isFlipped = false;
           return newCards;
         });
+
+        setIsPlayerOneTurn((prevTurn) => !prevTurn);
         setIsCheckingMatch(false);
       }, 2000);
     }
@@ -109,8 +113,14 @@ export default function Memory() {
       ) : (
         <div className="memory-container">
           <div className="memory-info">
-            <p>{playerOne}: <span>{playerOnePoints}</span> point{playerOnePoints === 0 || playerOnePoints > 1 ? 's' : ''}</p>
-            <p>{playerTwo}: <span>{playerTwoPoints}</span> point{playerTwoPoints === 0 || playerTwoPoints > 1 ? 's' : ''}</p>
+            <p className={`memory-player ${isPlayerOneTurn ? 'turn-player-one' : ''}`}>{playerOne}: 
+              <span>{playerOnePoints}</span> 
+              point{playerOnePoints === 0 || playerOnePoints > 1 ? 's' : ''}
+            </p>
+            <p className={`memory-player ${!isPlayerOneTurn ? 'turn-player-two' : ''}`}>{playerTwo}: 
+              <span>{playerTwoPoints}</span> 
+              point{playerTwoPoints === 0 || playerTwoPoints > 1 ? 's' : ''}
+            </p>
             <button onClick={resetGame}>Reset</button>
           </div>
           <div className="memory-board">
@@ -119,7 +129,7 @@ export default function Memory() {
                 key={card.cardId}
                 image={card.image}
                 isFlipped={card.isFlipped}
-                isMatched={card.isMatched}
+                ownedBy={card.ownedBy}
                 onCardClick={() => handleCardClick(card.cardId)}
               />
             ))}

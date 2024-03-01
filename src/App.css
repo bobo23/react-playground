@@ -2,6 +2,8 @@
   margin: 0 auto;
   text-align: center;
   width: 100%;
+  --color-player-one: #a8de7c;
+  --color-player-two: #9ad3e3;
 }
 
 h2 {
@@ -250,11 +252,43 @@ h2 {
 }
 
 .memory-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   width: 25%;
+
+  .memory-player {
+    font-weight: bold;
+    width: 66%;
+  }
+
+  .memory-player.turn-player-one {
+    background-color: var(--color-player-one);
+  }
+
+  .memory-player.turn-player-two {
+    background-color: var(--color-player-two);
+  }
 
   span {
     font-weight: bold;
-    color: #4ad94a;
+    color: #e61938;
+    margin: 0 5px;
+  }
+
+  button {
+    margin: 15px 0;
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    border-radius: 3px;
+    border: 1px solid #111;
+    background: #e7f56c;
+    transition: all 200ms;
+
+    &:hover {
+      background: #cee317;
+    }
   }
 }
 
@@ -323,6 +357,14 @@ h2 {
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+.memory-card-back img.player-one {
+  background: var(--color-player-one);
+}
+
+.memory-card-back img.player-two {
+  background: var(--color-player-two);
 }
 
 .matched .memory-card-back img {
