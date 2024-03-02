@@ -8,4 +8,4 @@ export default function memoryCards (count: number) {
     }));
 
     return cards.sort(() => Math.random() - 0.5);
-};
+}

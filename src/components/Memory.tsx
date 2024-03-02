@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import MemoryCard from './MemoryCard';
 import memoryCards from '../data/memoryCardsData';
 import MemoryStart from './MemoryStart';
@@ -34,13 +34,55 @@ export default function Memory() {
     }
   }, [cards]);
 
-  function handleStartGame(playerOneName: string, playerTwoName: string) {
+  const handleStartGame = useCallback((playerOneName: string, playerTwoName: string) => {
     setPlayerOne(playerOneName);
     setPlayerTwo(playerTwoName);
     setIsGameStarted(true);
-  }
+  }, []);
 
-  function handleCardClick(cardId: number) {
+  const handleMatch = useCallback((secondFlippedCardIndex: number) => {
+    setCards((prevCards) => {
+      const newCards = [...prevCards];
+
+      newCards[firstFlippedCardIndex!].ownedBy = isPlayerOneTurn ? 'player-one' : 'player-two';
+      newCards[secondFlippedCardIndex].ownedBy = isPlayerOneTurn ? 'player-one' : 'player-two';
+
+      return newCards;
+    });
+
+    if (isPlayerOneTurn) setPlayerOnePoints((prevPoints) => prevPoints + 1);
+    else setPlayerTwoPoints((prevPoints) => prevPoints + 1);
+    
+    setIsCheckingMatch(false);
+  }, [firstFlippedCardIndex, isPlayerOneTurn]);
+
+  const handleNoMatch = useCallback((secondFlippedCardIndex: number) => {
+    setTimeout(() => {
+      setCards((prevCards) => {
+        const newCards = [...prevCards];
+        newCards[firstFlippedCardIndex!].isFlipped = false;
+        newCards[secondFlippedCardIndex].isFlipped = false;
+        return newCards;
+      });
+
+      setIsPlayerOneTurn((prevTurn) => !prevTurn);
+      setIsCheckingMatch(false);
+    }, 2000);
+  }, [firstFlippedCardIndex]);
+
+  const checkIfCardsMatch = useCallback((cardsCopy: Card[], secondFlippedCardIndex: number) => {
+    if (firstFlippedCardIndex == null) return;
+
+    if (cardsCopy[firstFlippedCardIndex].image === cardsCopy[secondFlippedCardIndex].image) {
+      handleMatch(secondFlippedCardIndex);
+    } else {
+      handleNoMatch(secondFlippedCardIndex);
+    }
+
+    setIsSecondFlip(false);
+  }, [firstFlippedCardIndex, handleMatch, handleNoMatch]);
+
+  const handleCardClick = useCallback((cardId: number) => {
     const cardsCopy = [...cards];
     const clickedCardIndex = cardsCopy.findIndex((card) => card.cardId === cardId);
 
@@ -59,50 +101,17 @@ export default function Memory() {
     setFirstFlippedCardIndex(clickedCardIndex);
     setIsSecondFlip(true);
     setCards(cardsCopy);
-  }
-
-  function checkIfCardsMatch(cardsCopy: Card[], secondFlippedCardIndex: number) {
-    if (firstFlippedCardIndex == null) return;
-
-    if (cardsCopy[firstFlippedCardIndex].image === cardsCopy[secondFlippedCardIndex].image) {
-      setCards((prevCards) => {
-        const newCards = [...prevCards];
-        newCards[firstFlippedCardIndex].ownedBy = isPlayerOneTurn ? 'player-one' : 'player-two';
-        newCards[secondFlippedCardIndex].ownedBy = isPlayerOneTurn ? 'player-one' : 'player-two';
-        return newCards;
-      });
-
-      if (isPlayerOneTurn) setPlayerOnePoints((prevPoints) => prevPoints + 1);
-      else setPlayerTwoPoints((prevPoints) => prevPoints + 1);
-      
-      setIsCheckingMatch(false);
-    } else {
-      setTimeout(() => {
-        setCards((prevCards) => {
-          const newCards = [...prevCards];
-          newCards[firstFlippedCardIndex].isFlipped = false;
-          newCards[secondFlippedCardIndex].isFlipped = false;
-          return newCards;
-        });
-
-        setIsPlayerOneTurn((prevTurn) => !prevTurn);
-        setIsCheckingMatch(false);
-      }, 2000);
-    }
-
-    setIsSecondFlip(false);
-  }
+  }, [cards, isCheckingMatch, isSecondFlip, checkIfCardsMatch]);
 
   function resetGame() {
     setCards(memoryCards(16));
     setPlayerOnePoints(0);
     setPlayerTwoPoints(0);
     setIsGameStarted(false);
-    setPlayerOne('');
-    setPlayerTwo('');
     setIsSecondFlip(false);
     setIsCheckingMatch(false);
     setFirstFlippedCardIndex(null);
+    setIsPlayerOneTurn(true);
   }
 
   return (
