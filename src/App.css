@@ -219,6 +219,12 @@ h2 {
   width: 100%;
 }
 
+@media (max-width: 600px) {
+  .memory-container {
+    flex-direction: column;
+  }
+}
+
 .memory-start {
   display: flex;
   flex-direction: column;
@@ -281,6 +287,12 @@ h2 {
   }
 }
 
+@media (max-width: 600px) {
+  .memory-info {
+    width: 100%;
+  }
+}
+
 .memory-board {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -288,6 +300,12 @@ h2 {
   width: 50%;
   padding: 10px;
   background-color: #f5f3f2;
+}
+
+@media (max-width: 600px) {
+  .memory-board {
+    width: 90%;
+  }
 }
 
 .memory-card {
@@ -389,5 +407,11 @@ h2 {
     p.winner-player-two {
       color: var(--color-player-two);
     }
+  }
+}
+
+@media (max-width: 600px) {
+  .memory-over {
+    width: 100%;
   }
 }
