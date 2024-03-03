@@ -16,23 +16,30 @@ export default function Memory() {
   const [isGameStarted, setIsGameStarted] = useState<boolean>(false);
   const [isSecondFlip , setIsSecondFlip] = useState<boolean>(false);
   const [isCheckingMatch, setIsCheckingMatch] = useState<boolean>(false);
+  const [isPlayerOneTurn, setIsPlayerOneTurn] = useState<boolean>(true);
+  const [isGameOver, setIsGameOver] = useState<boolean>(false);
   const [firstFlippedCardIndex, setFirstFlippedCardIndex] = useState<number | null>(null);
   const [playerOne, setPlayerOne] = useState('');
   const [playerTwo, setPlayerTwo] = useState('');
   const [playerOnePoints, setPlayerOnePoints] = useState<number>(0);
   const [playerTwoPoints, setPlayerTwoPoints] = useState<number>(0);
-  const [isPlayerOneTurn, setIsPlayerOneTurn] = useState<boolean>(true);
 
   useEffect(() => {
-    const isGameOver = cards.every((card) => card.ownedBy !== undefined);
-
-    if (isGameOver && cards.length > 0) {
-      setTimeout(() => {
-        alert('You won!');
-        resetGame();
-      }, 500);
+    if(cards.every((card) => card.ownedBy !== undefined)) {
+      setIsGameOver(true);
     }
   }, [cards]);
+
+  function handleGameOver() {
+    if (playerOnePoints === playerTwoPoints) {
+      return <p>It's a tie!</p>;
+    }
+    if (playerOnePoints > playerTwoPoints) {
+      return <p className="winner-player-one">{playerOne} wins!</p>;
+    }
+
+    return <p className="winner-player-two">{playerTwo} wins!</p>;
+  }
 
   const handleStartGame = useCallback((playerOneName: string, playerTwoName: string) => {
     setPlayerOne(playerOneName);
@@ -112,6 +119,7 @@ export default function Memory() {
     setIsCheckingMatch(false);
     setFirstFlippedCardIndex(null);
     setIsPlayerOneTurn(true);
+    setIsGameOver(false);
   }
 
   return (
@@ -130,7 +138,6 @@ export default function Memory() {
               <span>{playerTwoPoints}</span> 
               point{playerTwoPoints === 0 || playerTwoPoints > 1 ? 's' : ''}
             </p>
-            <button onClick={resetGame}>Reset</button>
           </div>
           <div className="memory-board">
             {cards.map((card) => (
@@ -142,6 +149,14 @@ export default function Memory() {
                 onCardClick={() => handleCardClick(card.cardId)}
               />
             ))}
+          </div>
+          <div className="memory-over">
+            {isGameOver && (
+              <div className="memory-winner">
+                {handleGameOver()}
+                <button onClick={resetGame}>Reset</button>
+              </div>
+            )}
           </div>
         </div>
       )}

@@ -198,6 +198,20 @@ h2 {
   background-color: #f0ebeb;
 }
 
+.memory button {
+  margin: 15px 0;
+  padding: 10px 20px;
+  font-size: 1.2rem;
+  border-radius: 3px;
+  border: 1px solid #111;
+  background-color: #e7f56c;
+  transition: all 200ms;
+
+  &:hover {
+    background-color: #cee317;
+  }
+}
+
 .memory-container {
   display: flex;
   flex-direction: row;
@@ -228,25 +242,14 @@ h2 {
 
       &:focus {
         outline: none;
+        border: 1px solid #3d8532;
+        box-shadow: 0px 0px 12px 0px rgba(0,0,0,0.2);
+        -webkit-box-shadow: 0px 0px 12px 0px rgba(0,0,0,0.2);
       }
     }
 
     input.memory-error {
       border: 1px solid red;
-    }
-
-    button {
-      margin: 10px 0;
-      padding: 10px 20px;
-      font-size: 1.2rem;
-      border-radius: 3px;
-      border: none;
-      background-color: #e7f56c;
-      transition: all 200ms;
-
-      &:hover {
-        background-color: #cee317;
-      }
     }
   }
 }
@@ -275,20 +278,6 @@ h2 {
     font-weight: bold;
     color: #e61938;
     margin: 0 5px;
-  }
-
-  button {
-    margin: 15px 0;
-    padding: 10px 20px;
-    font-size: 1.2rem;
-    border-radius: 3px;
-    border: 1px solid #111;
-    background-color: #e7f56c;
-    transition: all 200ms;
-
-    &:hover {
-      background-color: #cee317;
-    }
   }
 }
 
@@ -369,4 +358,36 @@ h2 {
 
 .matched .memory-card-back img {
   opacity: 0.5;
+}
+
+.memory-over {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  padding: 20px 0;
+  width: 25%;
+
+  .memory-winner {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    padding: 20px 0;
+  
+    p {
+      font-size: 1.6rem;
+      margin: 10px 0;
+    }
+  
+    p.winner-player-one {
+      color: var(--color-player-one);
+    }
+
+    p.winner-player-two {
+      color: var(--color-player-two);
+    }
+  }
 }
