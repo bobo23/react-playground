@@ -80,6 +80,7 @@ export default function ShoppingList() {
             value={inputValue}
             placeholder="Produkt hinzufügen..."
             onChange={handleChange}
+            maxLength={20}
           />
           <button className="list-submission__btn" type="submit"> 
             <span>+</span>

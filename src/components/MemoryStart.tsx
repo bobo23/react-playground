@@ -39,6 +39,7 @@ export default function MemoryStart({ startGame }: MemoryStartProps) {
           value={playerOne}
           onChange={(e) => setPlayerOne(e.target.value)}
           className={isErrorPlayerOne ? 'memory-error' : ''}
+          maxLength={15}
         />
         <input
           type="text"
@@ -46,6 +47,7 @@ export default function MemoryStart({ startGame }: MemoryStartProps) {
           value={playerTwo}
           onChange={(e) => setPlayerTwo(e.target.value)}
           className={isErrorPlayerTwo ? 'memory-error' : ''}
+          maxLength={15}
         />
         <button type="submit">Start</button>
       </form>
