@@ -91,6 +91,12 @@ h2 {
   width: 350px;
 }
 
+@media (max-width: 600px) {
+  .list-container {
+    width: 90%;
+  }
+}
+
 .list-submission {
   height: 46px;
   display: flex;
