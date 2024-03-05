@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import Square from './Square';
 
 interface SquaresValue {
@@ -51,7 +51,7 @@ export default function TixTacToe() {
   const [xIsNext, setXIsNext] = useState<boolean>(true);
   const [squares, setSquares] = useState<string[]>(Array(9).fill(''));
 
-  function handleClick(index: number) {
+  const handleClick = useCallback((index: number) => {
     if (squares[index] || calculateEnd({ squares })) {
       return;
     }
@@ -66,7 +66,7 @@ export default function TixTacToe() {
 
     setSquares(nextSquares);
     setXIsNext(!xIsNext);
-  }
+  }, [squares, xIsNext]);
 
   function handleReset() {
     setSquares(Array(9).fill(''));
