@@ -1,10 +1,20 @@
-
-
 export default function Header() {
-    return (
-        <>
-            <h1>React Games</h1>
-            <h2>Play some games</h2>
-        </>
-    );
+  return (
+    <header className="header">
+      <h2>React Playground</h2>
+      <nav className="navbar">
+        <ul className="navbar-nav">
+          <li className="nav-item">
+            <a href="/">Home</a>
+          </li>
+          <li className="nav-item">
+            <a href="/about">Über Uns</a>
+          </li>
+          <li className="nav-item">
+            <a href="/contact">Kontakt</a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+  );
 }
