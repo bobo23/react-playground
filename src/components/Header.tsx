@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 export default function Header() {
   return (
     <header className="header">
@@ -5,13 +7,16 @@ export default function Header() {
       <nav className="navbar">
         <ul className="navbar-nav">
           <li className="nav-item">
-            <a href="/">Home</a>
+            <Link to="/">Home</Link>
           </li>
           <li className="nav-item">
-            <a href="/about">Über Uns</a>
+            <Link to="/tictactoe">Tic Tac Toe</Link>
           </li>
           <li className="nav-item">
-            <a href="/contact">Kontakt</a>
+            <Link to="/memory">Memory</Link>
+          </li>
+          <li className="nav-item">
+            <Link to="/shopping-list">Shopping List</Link>
           </li>
         </ul>
       </nav>
