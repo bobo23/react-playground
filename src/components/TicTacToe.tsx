@@ -1,4 +1,5 @@
 import { useState, useCallback } from 'react';
+import Layout from './Layout';
 import Square from './Square';
 
 interface SquaresValue {
@@ -77,29 +78,31 @@ export default function TixTacToe() {
   const status = getStatus({ end, xIsNext });
 
   return (
-    <div className="tictactoe">
-      <h2>Tic Tac Toe</h2>
-      <div className="board">
-        <div className="board-row">
-          <Square value={squares[0]} onSquareClick={() => handleClick(0)} isX={xIsNext} end={end} />
-          <Square value={squares[1]} onSquareClick={() => handleClick(1)} isX={xIsNext} end={end} />
-          <Square value={squares[2]} onSquareClick={() => handleClick(2)} isX={xIsNext} end={end} />
+    <Layout>
+      <div className="tictactoe">
+        <h2>Tic Tac Toe</h2>
+        <div className="board">
+          <div className="board-row">
+            <Square value={squares[0]} onSquareClick={() => handleClick(0)} isX={xIsNext} end={end} />
+            <Square value={squares[1]} onSquareClick={() => handleClick(1)} isX={xIsNext} end={end} />
+            <Square value={squares[2]} onSquareClick={() => handleClick(2)} isX={xIsNext} end={end} />
+          </div>
+          <div className="board-row">
+            <Square value={squares[3]} onSquareClick={() => handleClick(3)} isX={xIsNext} end={end} />
+            <Square value={squares[4]} onSquareClick={() => handleClick(4)} isX={xIsNext} end={end} />
+            <Square value={squares[5]} onSquareClick={() => handleClick(5)} isX={xIsNext} end={end} />
+          </div>
+          <div className="board-row">
+            <Square value={squares[6]} onSquareClick={() => handleClick(6)} isX={xIsNext} end={end} />
+            <Square value={squares[7]} onSquareClick={() => handleClick(7)} isX={xIsNext} end={end} />
+            <Square value={squares[8]} onSquareClick={() => handleClick(8)} isX={xIsNext} end={end} />
+          </div>
         </div>
-        <div className="board-row">
-          <Square value={squares[3]} onSquareClick={() => handleClick(3)} isX={xIsNext} end={end} />
-          <Square value={squares[4]} onSquareClick={() => handleClick(4)} isX={xIsNext} end={end} />
-          <Square value={squares[5]} onSquareClick={() => handleClick(5)} isX={xIsNext} end={end} />
-        </div>
-        <div className="board-row">
-          <Square value={squares[6]} onSquareClick={() => handleClick(6)} isX={xIsNext} end={end} />
-          <Square value={squares[7]} onSquareClick={() => handleClick(7)} isX={xIsNext} end={end} />
-          <Square value={squares[8]} onSquareClick={() => handleClick(8)} isX={xIsNext} end={end} />
+        <div className="status">{status}</div>
+        <div className="reset">
+          {end && (<button onClick={handleReset}>Reset</button>)}
         </div>
       </div>
-      <div className="status">{status}</div>
-      <div className="reset">
-        {end && (<button onClick={handleReset}>Reset</button>)}
-      </div>
-    </div>
+    </Layout>
   );
 }

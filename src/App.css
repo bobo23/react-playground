@@ -13,20 +13,15 @@ h2 {
 .app {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   width: 100%;
-}
-
-.feature {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  min-height: 100vh;
 }
 
 /* -------- Tic Tac Toe Style ------- */
 
 .tictactoe {
   display: flex;
+  flex-grow: 1;
   flex-direction: column;
   justify-content: center;
   background-color: #f5f3f2;
@@ -77,6 +72,7 @@ h2 {
 
 .shopping-list {
   display: flex;
+  flex-grow: 1;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -197,6 +193,7 @@ h2 {
 
 .memory {
   display: flex;
+  flex-grow: 1;
   flex-direction: column;
   justify-content: center;
   align-items: center;

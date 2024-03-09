@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
+import Layout from './Layout';
 import MemoryCard from './MemoryCard';
 import memoryCards from '../data/memoryCardsData';
 import MemoryStart from './MemoryStart';
@@ -123,43 +124,45 @@ export default function Memory() {
   }
 
   return (
-    <div className="memory">
-      <h2>Memory</h2>
-      {!isGameStarted ? (
-        <MemoryStart startGame={handleStartGame}/>
-      ) : (
-        <div className="memory-container">
-          <div className="memory-info">
-            <p className={`memory-player ${isPlayerOneTurn ? 'turn-player-one' : ''}`}>{playerOne}: 
-              <span>{playerOnePoints}</span> 
-              point{playerOnePoints === 0 || playerOnePoints > 1 ? 's' : ''}
-            </p>
-            <p className={`memory-player ${!isPlayerOneTurn ? 'turn-player-two' : ''}`}>{playerTwo}: 
-              <span>{playerTwoPoints}</span> 
-              point{playerTwoPoints === 0 || playerTwoPoints > 1 ? 's' : ''}
-            </p>
+    <Layout>
+      <div className="memory">
+        <h2>Memory</h2>
+        {!isGameStarted ? (
+          <MemoryStart startGame={handleStartGame}/>
+        ) : (
+          <div className="memory-container">
+            <div className="memory-info">
+              <p className={`memory-player ${isPlayerOneTurn ? 'turn-player-one' : ''}`}>{playerOne}: 
+                <span>{playerOnePoints}</span> 
+                point{playerOnePoints === 0 || playerOnePoints > 1 ? 's' : ''}
+              </p>
+              <p className={`memory-player ${!isPlayerOneTurn ? 'turn-player-two' : ''}`}>{playerTwo}: 
+                <span>{playerTwoPoints}</span> 
+                point{playerTwoPoints === 0 || playerTwoPoints > 1 ? 's' : ''}
+              </p>
+            </div>
+            <div className="memory-board">
+              {cards.map((card) => (
+                <MemoryCard
+                  key={card.cardId}
+                  image={card.image}
+                  isFlipped={card.isFlipped}
+                  ownedBy={card.ownedBy}
+                  onCardClick={() => handleCardClick(card.cardId)}
+                />
+              ))}
+            </div>
+            <div className="memory-over">
+              {isGameOver && (
+                <div className="memory-winner">
+                  {handleGameOver()}
+                  <button onClick={resetGame}>Reset</button>
+                </div>
+              )}
+            </div>
           </div>
-          <div className="memory-board">
-            {cards.map((card) => (
-              <MemoryCard
-                key={card.cardId}
-                image={card.image}
-                isFlipped={card.isFlipped}
-                ownedBy={card.ownedBy}
-                onCardClick={() => handleCardClick(card.cardId)}
-              />
-            ))}
-          </div>
-          <div className="memory-over">
-            {isGameOver && (
-              <div className="memory-winner">
-                {handleGameOver()}
-                <button onClick={resetGame}>Reset</button>
-              </div>
-            )}
-          </div>
-        </div>
-      )}
-    </div>
+        )}
+      </div>
+    </Layout>
   );
 }

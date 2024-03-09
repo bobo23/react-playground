@@ -1,5 +1,6 @@
 import { useState, ChangeEvent, FormEvent } from 'react';
 import { DragDropContext, Droppable, Draggable, DropResult } from 'react-beautiful-dnd';
+import Layout from './Layout';
 import ShoppingListItem from './ShoppingListItem';
 
 interface Items {
@@ -70,46 +71,48 @@ export default function ShoppingList() {
   }
 
   return(
-    <div className="shopping-list">
-      <h2>Shopping List</h2>
-      <div className="list-container">
-        <form className="list-submission" onSubmit={handleSubmit}>
-          <input
-            className="list-submission__input"
-            type="text"
-            value={inputValue}
-            placeholder="Produkt hinzufügen..."
-            onChange={handleChange}
-            maxLength={20}
-          />
-          <button className="list-submission__btn" type="submit"> 
-            <span>+</span>
-          </button>
-        </form>
-        <DragDropContext onDragEnd={onDragEnd}>
-          <Droppable droppableId="droppable-shopping-list">
-            {(provided) => (
-              <ul className="list" {...provided.droppableProps} ref={provided.innerRef}>
-                {items.map((item, index) => (
-                  <Draggable key={item.itemId} draggableId={item.itemId} index={index} isDragDisabled={item.isChecked}>
-                    {(provided) => (
-                      <ShoppingListItem
-                        key={index}
-                        value={item.value}
-                        isChecked={item.isChecked}
-                        onCheckClick={() => handleCheckClick(index)}
-                        onDeleteClick={() => handleDeleteClick(index)}
-                        provided={provided}
-                      />
-                    )}
-                  </Draggable>
-                ))}
-                {provided.placeholder}
-              </ul>
-            )}
-          </Droppable>
-        </DragDropContext>
+    <Layout>
+      <div className="shopping-list">
+        <h2>Shopping List</h2>
+        <div className="list-container">
+          <form className="list-submission" onSubmit={handleSubmit}>
+            <input
+              className="list-submission__input"
+              type="text"
+              value={inputValue}
+              placeholder="Produkt hinzufügen..."
+              onChange={handleChange}
+              maxLength={20}
+            />
+            <button className="list-submission__btn" type="submit"> 
+              <span>+</span>
+            </button>
+          </form>
+          <DragDropContext onDragEnd={onDragEnd}>
+            <Droppable droppableId="droppable-shopping-list">
+              {(provided) => (
+                <ul className="list" {...provided.droppableProps} ref={provided.innerRef}>
+                  {items.map((item, index) => (
+                    <Draggable key={item.itemId} draggableId={item.itemId} index={index} isDragDisabled={item.isChecked}>
+                      {(provided) => (
+                        <ShoppingListItem
+                          key={index}
+                          value={item.value}
+                          isChecked={item.isChecked}
+                          onCheckClick={() => handleCheckClick(index)}
+                          onDeleteClick={() => handleDeleteClick(index)}
+                          provided={provided}
+                        />
+                      )}
+                    </Draggable>
+                  ))}
+                  {provided.placeholder}
+                </ul>
+              )}
+            </Droppable>
+          </DragDropContext>
+        </div>
       </div>
-    </div>
+    </Layout>
   );
 }
