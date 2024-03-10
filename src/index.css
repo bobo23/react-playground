@@ -68,21 +68,24 @@ button {
 
 .logo {
   margin: 1.5rem 0 1.5rem 2rem;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-}
 
-.logo a {
-  text-decoration: none;
-  font-size: 1.5em;
-  font-weight: 700;
-  color: inherit;
-}
+  a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    font-size: 1.3em;
+    font-weight: 700;
+    color: inherit;
+  }
 
-.logo img {
-  display: flex;
-  align-items: center;
+  img {
+    display: flex;
+    align-items: center;
+  }
+
+  span {
+    padding: 0.5rem;
+  }
 }
 
 .navbar {
