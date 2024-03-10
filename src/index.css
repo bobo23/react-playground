@@ -9,8 +9,12 @@
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
 }
 
 body {
@@ -51,11 +55,12 @@ button {
 }
 
 .header {
+  text-decoration: none;
   display: flex;
   justify-content: space-between;
   align-items: stretch;
   background-color: #333;
-  color: rgb(245, 245, 21);
+  color: #f5f515;
   font-size: 1.3rem;
   font-weight: 600;
 }
@@ -118,13 +123,13 @@ button {
     display: flex;
     align-items: center;
     height: 100%;
-    background-color: rgb(245, 245, 21);
+    background-color: #f5f515;
     color: #333;
   }
 }
 
 .nav-item:hover {
-  background-color: rgb(245, 245, 21);
+  background-color: #f5f515;
   color: #333;
 }
 
@@ -135,4 +140,87 @@ button {
   text-decoration: none;
   color: inherit;
   padding: 0 1rem;
+}
+
+/* ------------ burger menu ------------ */
+
+.burger-header {
+  margin-bottom: 2rem;
+}
+
+.bm-burger-button {
+  position: fixed;
+  width: 36px;
+  height: 30px;
+  right: 36px;
+  top: 36px;
+}
+
+/* Color/shape of burger icon bars */
+.bm-burger-bars {
+  background: #333;
+  border: 1px solid #f5f515;
+}
+
+/* Color/shape of burger icon bars on hover*/
+.bm-burger-bars-hover {
+  background: #f5f515;
+  border: 1px solid #333;
+}
+
+/* Position and sizing of clickable cross button */
+.bm-cross-button {
+  height: 24px;
+  width: 24px;
+}
+
+/* Color/shape of close button cross */
+.bm-cross {
+  background: #f5f515;
+  border: 0.5px solid #333;
+}
+
+/*
+Sidebar wrapper styles
+Note: Beware of modifying this element as it can break the animations - you should not need to touch it in most cases
+*/
+.bm-menu-wrap {
+  position: fixed;
+  height: 100%;
+}
+
+/* General sidebar styles */
+.bm-menu {
+  text-decoration: none;
+  background: #333;
+  padding-top: 2.5em;
+  font-size: 1.15em;
+}
+
+/* Morph shape necessary with bubble or elastic */
+.bm-morph-shape {
+  fill: #373a47;
+}
+
+/* Individual item */
+.bm-item {
+  display: inline-block;
+  color: #f5f515;
+  font-weight: 600;
+  padding: 1rem 0;
+}
+
+.bm-item:hover {
+  background: #f5f515;
+  color: #333;
+}
+
+.bm-item.active {
+  background: #f5f515;
+  color: #333;
+}
+
+/* Styling of overlay */
+.bm-overlay {
+  background: rgba(0, 0, 0, 0.3);
 }
