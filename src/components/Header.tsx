@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
-import { NavLink, Link } from "react-router-dom";
+import { NavLink, Link } from 'react-router-dom';
 import { stack as Menu } from 'react-burger-menu';
-import logo from "../assets/react.svg";
+import logo from '../assets/react.svg';
 
 export default function Header() {
   const [isMobile, setIsMobile] = useState(window.innerWidth < 700);
