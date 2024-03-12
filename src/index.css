@@ -224,3 +224,9 @@ Note: Beware of modifying this element as it can break the animations - you shou
 .bm-overlay {
   background: rgba(0, 0, 0, 0.3);
 }
+
+.home {
+  background-color: #c3c9ec;
+  height: 100vh;
+  padding: 3rem 2rem;
+}
