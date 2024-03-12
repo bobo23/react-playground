@@ -3,7 +3,7 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
     overflow: hidden;
-    margin: 20px;
+    margin: 30px;
     background-color: #8b8787;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
@@ -22,7 +22,7 @@
 }
 
 .card-image img:hover {
-    filter: blur(2px);
+    filter: grayscale(100%);
 }
   
 .card-content {
