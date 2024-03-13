@@ -35,7 +35,7 @@ export default function MemoryStart({ startGame }: MemoryStartProps) {
       <form onSubmit={handleSubmit}>
         <input
           type="text"
-          placeholder="Player 1"
+          placeholder="Enter Name..."
           value={playerOne}
           onChange={(e) => setPlayerOne(e.target.value)}
           className={isErrorPlayerOne ? 'memory-error' : ''}
@@ -43,7 +43,7 @@ export default function MemoryStart({ startGame }: MemoryStartProps) {
         />
         <input
           type="text"
-          placeholder="Player 2"
+          placeholder="Enter Name..."
           value={playerTwo}
           onChange={(e) => setPlayerTwo(e.target.value)}
           className={isErrorPlayerTwo ? 'memory-error' : ''}

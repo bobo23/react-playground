@@ -1,0 +1,51 @@
+.tictactoe {
+    display: flex;
+    flex-grow: 1;
+    flex-direction: column;
+    justify-content: center;
+    background-color: #d9d5d5;
+}
+
+.board {
+    padding: 10px 20px;
+}
+
+.board-row {
+    display: flex;
+    justify-content: center;
+}
+
+.square {
+    height: 44px;
+    width: 44px;
+    margin-right: -1px;
+    margin-top: -1px;
+    float: left;
+    background-color: #fff;
+}
+
+.status {
+    padding: 10px 20px;
+    display: flex;
+    justify-content: center;
+    font-weight: bold;
+}
+
+.reset {
+    padding: 10px 20px;
+    display: flex;
+    justify-content: center;
+    height: 40px;
+
+    button {
+        width: 120px;
+        padding: 5px 0px;
+        height: 75%;
+        background-color: #f5f515;
+    }
+
+    button:hover {
+        background-color: #cee317;
+    }
+}
+  

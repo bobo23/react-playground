@@ -1,8 +1,9 @@
 import { useState, useEffect, useCallback } from 'react';
-import Layout from './Layout';
+import memoryCards from '../../data/memoryCardsData';
+import Layout from '../Layout';
 import MemoryCard from './MemoryCard';
-import memoryCards from '../data/memoryCardsData';
 import MemoryStart from './MemoryStart';
+import './Memory.css';
 
 interface Card {
   cardId: number;

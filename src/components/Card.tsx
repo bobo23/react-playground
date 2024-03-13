@@ -1,5 +1,5 @@
 import { NavLink } from 'react-router-dom';
-import '../Card.css';
+import './Card.css';
 
 interface CardProps {
   title: string;

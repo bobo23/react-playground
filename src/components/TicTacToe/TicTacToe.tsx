@@ -1,6 +1,7 @@
 import { useState, useCallback } from 'react';
-import Layout from './Layout';
+import Layout from '../Layout';
 import Square from './Square';
+import './TicTacToe.css';
 
 interface SquaresValue {
   squares: string[]

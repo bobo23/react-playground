@@ -1,7 +1,8 @@
 import { useState, ChangeEvent, FormEvent } from 'react';
 import { DragDropContext, Droppable, Draggable, DropResult } from 'react-beautiful-dnd';
-import Layout from './Layout';
+import Layout from '../Layout';
 import ShoppingListItem from './ShoppingListItem';
+import './ShoppingList.css';
 
 interface Items {
   itemId: string;

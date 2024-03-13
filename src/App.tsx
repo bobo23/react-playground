@@ -1,8 +1,8 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './components/Home';
-import TicTacToe from './components/TicTacToe';
-import ShoppingList from './components/ShoppingList';
-import Memory from './components/Memory';
+import TicTacToe from './components/TicTacToe/TicTacToe';
+import ShoppingList from './components/ShoppingList/ShoppingList';
+import Memory from './components/Memory/Memory';
 import './App.css';
 
 export default function App() {

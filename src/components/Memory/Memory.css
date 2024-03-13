@@ -1,0 +1,246 @@
+#root {
+  --color-player-one: #a8de7c;
+  --color-player-two: #9ad3e3;
+}
+
+.memory {
+  display: flex;
+  flex-grow: 1;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px 0;
+  background-color: #fff;
+}
+
+.memory button {
+  margin: 15px 0;
+  padding: 10px 20px;
+  font-size: 1.2rem;
+  border-radius: 3px;
+  border: 1px solid #111;
+  background-color: #f5f515;
+  transition: all 200ms;
+
+  &:hover {
+    background-color: #cee317;
+  }
+}
+
+.memory-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+}
+
+@media (max-width: 600px) {
+  .memory-container {
+    flex-direction: column;
+  }
+}
+
+.memory-start ::-ms-input-placeholder {
+  color: #f5f515;
+  opacity: 1;
+}
+.memory-start ::-webkit-input-placeholder {
+  color: #f5f515;
+  opacity: 0.5;
+}
+.memory-start ::-moz-placeholder {
+  color: #f5f515;
+}
+
+.memory-start {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+
+  form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    input {
+      margin: 10px 0;
+      padding: 10px;
+      font-size: 1.2rem;
+      border-radius: 3px;
+      border: none;
+      width: 200px;
+      text-align: center;
+      background-color: #737171;
+      color: #f5f515;
+
+      &:focus {
+        outline: none;
+        border: 1px solid #f5f515;
+        box-shadow: 0px 0px 12px 0px rgba(0,0,0,0.2);
+        -webkit-box-shadow: 0px 0px 12px 0px rgba(0,0,0,0.2);
+      }
+    }
+
+    input.memory-error {
+      border: 1px solid red;
+    }
+  }
+}
+
+.memory-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 25%;
+
+  .memory-player {
+    font-weight: bold;
+    width: 66%;
+  }
+
+  .memory-player.turn-player-one {
+    background-color: var(--color-player-one);
+  }
+
+  .memory-player.turn-player-two {
+    background-color: var(--color-player-two);
+  }
+
+  span {
+    font-weight: bold;
+    color: #e61938;
+    margin: 0 5px;
+  }
+}
+
+@media (max-width: 600px) {
+  .memory-info {
+    width: 100%;
+  }
+}
+
+.memory-board {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(4, 1fr);
+  width: 50%;
+  padding: 10px;
+  background-color: #f5f3f2;
+}
+
+@media (max-width: 600px) {
+  .memory-board {
+    width: 90%;
+  }
+}
+
+.memory-card {
+  perspective: 1000px;
+  transition: all 200ms;
+  aspect-ratio: 1 / 1;
+  padding: 10px;
+}
+
+.memory-card-inner {
+  height: 100%;
+  width: 100%;
+  cursor: pointer;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+  position: relative;
+}
+
+.memory-card.flipped .memory-card-inner {
+  transform: rotateY(180deg);
+}
+
+.memory-card-front, .memory-card-back {
+  backface-visibility: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #222;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  border-radius: 3px;
+}
+
+.memory-card-front {
+  z-index: 2;
+  background-color: #d0d6d1;
+  font-size: 2rem;
+  font-weight: bold;
+  color: #000;
+}
+
+.memory-card-front img {
+  width: 30%;
+  object-fit: cover;
+}
+
+.memory-card-back {
+  transform: rotateY(180deg);
+}
+
+.memory-card-back img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.memory-card-back img.player-one {
+  background-color: var(--color-player-one);
+}
+
+.memory-card-back img.player-two {
+  background-color: var(--color-player-two);
+}
+
+.matched .memory-card-back img {
+  opacity: 0.5;
+}
+
+.memory-over {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  padding: 20px 0;
+  width: 25%;
+
+  .memory-winner {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    padding: 20px 0;
+  
+    p {
+      font-size: 1.6rem;
+      margin: 10px 0;
+    }
+  
+    p.winner-player-one {
+      color: var(--color-player-one);
+    }
+
+    p.winner-player-two {
+      color: var(--color-player-two);
+    }
+  }
+}
+
+@media (max-width: 600px) {
+  .memory-over {
+    width: 100%;
+  }
+}
