@@ -116,12 +116,25 @@ export default function Memory() {
     setCards(memoryCards(16));
     setPlayerOnePoints(0);
     setPlayerTwoPoints(0);
+    setIsSecondFlip(false);
+    setIsCheckingMatch(false);
+    setFirstFlippedCardIndex(null);
+    setIsPlayerOneTurn(true);
+    setIsGameOver(false);
+  }
+
+  function resetFullGame() {
+    setCards(memoryCards(16));
+    setPlayerOnePoints(0);
+    setPlayerTwoPoints(0);
     setIsGameStarted(false);
     setIsSecondFlip(false);
     setIsCheckingMatch(false);
     setFirstFlippedCardIndex(null);
     setIsPlayerOneTurn(true);
     setIsGameOver(false);
+    setPlayerOne('');
+    setPlayerTwo('');
   }
 
   return (
@@ -157,7 +170,8 @@ export default function Memory() {
               {isGameOver && (
                 <div className="memory-winner">
                   {handleGameOver()}
-                  <button onClick={resetGame}>Reset</button>
+                  <button onClick={resetGame}>New Game</button>
+                  <button onClick={resetFullGame}>New Players</button>
                 </div>
               )}
             </div>
