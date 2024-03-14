@@ -3,6 +3,7 @@ import Home from './components/Home';
 import TicTacToe from './components/TicTacToe/TicTacToe';
 import ShoppingList from './components/ShoppingList/ShoppingList';
 import Memory from './components/Memory/Memory';
+import Gallery from './components/Gallery/Gallery';
 import './App.css';
 
 export default function App() {
@@ -13,6 +14,7 @@ export default function App() {
         <Route path="/tictactoe" element={<TicTacToe />} />
         <Route path="/shopping-list" element={<ShoppingList />} />
         <Route path="/memory" element={<Memory />} />
+        <Route path="/gallery" element={<Gallery />} />
       </Routes>
     </Router>
   )
