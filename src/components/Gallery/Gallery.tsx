@@ -7,12 +7,14 @@ export default function Gallery() {
     <Layout>
       <div className="gallery">
         <h2>Gallery</h2>
-        <div className="gallery-images">
-          {images.map((image, index) => (
-            <div key={index} className="gallery-image">
-              <img src={image.image} />
-            </div>
-          ))}
+        <div className="gallery-container">
+          <div className="gallery-thumbnail-container">
+            {images.map((image, index) => (
+              <div key={index} className="gallery-thumbnail">
+                <img src={image.thumb} />
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </Layout>

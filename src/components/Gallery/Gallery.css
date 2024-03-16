@@ -1,3 +1,41 @@
 .gallery {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    flex-grow: 1;
     background-color: #f2f2f2;
+}
+
+.gallery-container {
+    width: 80%;
+    background-color: red;
+    overflow-x: scroll;
+    white-space: nowrap;
+    display: flex;
+    flex-wrap: nowrap;
+}
+
+.gallery-container::-webkit-scrollbar {
+    display: none;
+}
+
+.gallery-thumbnail-container {
+    height: 100%;
+}
+
+.gallery-thumbnail {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    width: 130px;
+    height: 100px;
+    border: 1px solid #000;
+}
+
+.gallery-thumbnail img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
 }
