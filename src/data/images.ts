@@ -1,0 +1,37 @@
+export default [{
+    image: './src/assets/gallery/images/gallery1.jpg',
+    thumb: './src/assets/gallery/thumbnails/gallery1_thumb.jpg',
+}, {
+    image: './src/assets/gallery/images/gallery2.jpg',
+    thumb: './src/assets/gallery/thumbnails/gallery2_thumb.jpg',
+}, {
+    image: './src/assets/gallery/images/gallery3.jpg',
+    thumb: './src/assets/gallery/thumbnails/gallery3_thumb.jpg',
+}, {
+    image: './src/assets/gallery/images/gallery4.jpg',
+    thumb: './src/assets/gallery/thumbnails/gallery4_thumb.jpg',
+}, {
+    image: './src/assets/gallery/images/gallery5.jpg',
+    thumb: './src/assets/gallery/thumbnails/gallery5_thumb.jpg',
+}, {
+    image: './src/assets/gallery/images/gallery6.jpg',
+    thumb: './src/assets/gallery/thumbnails/gallery6_thumb.jpg',
+}, {
+    image: './src/assets/gallery/images/gallery7.jpg', 
+    thumb: './src/assets/gallery/thumbnails/gallery7_thumb.jpg',
+}, {
+    image: './src/assets/gallery/images/gallery8.jpg',
+    thumb: './src/assets/gallery/thumbnails/gallery8_thumb.jpg',
+}, {
+    image: './src/assets/gallery/images/gallery9.jpg',
+    thumb: './src/assets/gallery/thumbnails/gallery9_thumb.jpg',
+}, {
+    image: './src/assets/gallery/images/gallery10.jpg',
+    thumb: './src/assets/gallery/thumbnails/gallery10_thumb.jpg',
+}, {
+    image: './src/assets/gallery/images/gallery11.jpg',
+    thumb: './src/assets/gallery/thumbnails/gallery11_thumb.jpg',
+}, {
+    image: './src/assets/gallery/images/gallery12.jpg',
+    thumb: './src/assets/gallery/thumbnails/gallery12_thumb.jpg',
+}];
