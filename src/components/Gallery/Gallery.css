@@ -9,11 +9,12 @@
 
 .gallery-container {
     width: 80%;
-    background-color: red;
+    background-color: rgb(179, 179, 173);
     overflow-x: scroll;
     white-space: nowrap;
     display: flex;
     flex-wrap: nowrap;
+    height: 100px;
 }
 
 .gallery-container::-webkit-scrollbar {
@@ -29,9 +30,9 @@
     justify-content: center;
     align-items: center;
     overflow: hidden;
-    width: 130px;
-    height: 100px;
-    border: 1px solid #000;
+    width: auto;
+    height: 100%;
+    margin: 0 5px;
 }
 
 .gallery-thumbnail img {
