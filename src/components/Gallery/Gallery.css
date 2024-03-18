@@ -9,21 +9,33 @@
 
 .gallery-container {
     width: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.gallery-main-image-container {
+    overflow: hidden;
+    background-color: #000;
+}
+
+.gallery-main-image img {
+    width: 100%;
+    height: 500px;
+    object-fit: contain;
+}
+
+.gallery-thumbnail-container {
     background-color: #000;
     overflow-x: scroll;
     overflow-y: hidden;
     white-space: nowrap;
-    display: flex;
-    flex-wrap: nowrap;
     height: 100px;
 }
 
-.gallery-container::-webkit-scrollbar {
+.gallery-thumbnail-container::-webkit-scrollbar {
     display: none;
-}
-
-.gallery-thumbnail-container {
-    height: 100%;
 }
 
 .gallery-thumbnail {
