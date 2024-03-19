@@ -104,16 +104,12 @@
   .list-item__delete-btn {
     cursor: pointer;
     float: left;
-    margin: -4px;
-    padding: 5px;
     color: #ff3d00;
   }
   
   .list-item__check-btn {
     cursor: pointer;
     float: right;
-    margin: -4px;
-    padding: 4px 8px;
     color: #65e034;
   }
   
