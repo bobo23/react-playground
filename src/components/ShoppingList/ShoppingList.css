@@ -104,8 +104,9 @@
   .list-item__delete-btn {
     cursor: pointer;
     float: left;
+    margin: -4px;
     padding: 5px;
-    font-size: medium;
+    color: #ff3d00;
   }
   
   .list-item__check-btn {

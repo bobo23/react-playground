@@ -1,4 +1,6 @@
 import { DraggableProvided } from 'react-beautiful-dnd';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCheck, faXmark } from '@fortawesome/free-solid-svg-icons';
 
 interface ListItemProps {
   value: string;
@@ -22,12 +24,13 @@ export default function ShoppingListItem({
       ref={provided.innerRef}
       className={ isChecked ? "list-item list-item-checked" : "list-item" }
     >
-      <a className="list-item__delete-btn" onClick={onDeleteClick}>❌</a>
+      <a className="list-item__delete-btn" onClick={onDeleteClick}>
+        <FontAwesomeIcon icon={faXmark} />
+      </a>
         {value}
-      <a 
-        className="list-item__check-btn"
-        onClick={onCheckClick}
-      >✔</a>
+      <a className="list-item__check-btn" onClick={onCheckClick}>
+        <FontAwesomeIcon icon={faCheck} />
+      </a>
     </li>
   );
 }
