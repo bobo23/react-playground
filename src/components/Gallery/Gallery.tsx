@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faChevronRight, faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 import Layout from '../Layout';
 import images from '../../data/images';
 import './Gallery.css';
@@ -18,6 +20,8 @@ export default function Gallery() {
         <div className="gallery-main-image-container">
           <div className="gallery-main-image">
             <img src={images[currentImageIndex].image} />
+            <FontAwesomeIcon icon={faChevronLeft} className="gallery-main-image-nav-left" onClick={() => setCurrentImageIndex(currentImageIndex - 1)} />
+            <FontAwesomeIcon icon={faChevronRight} className="gallery-main-image-nav-right" onClick={() => setCurrentImageIndex(currentImageIndex + 1)} />
           </div>
         </div>
           <div className="gallery-thumbnail-container">
