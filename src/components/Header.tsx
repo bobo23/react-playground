@@ -22,6 +22,7 @@ export default function Header() {
           <NavLink to="/tictactoe" className={({ isActive }) => isActive ? "active" : ""}>Tic Tac Toe</NavLink>
           <NavLink to="/memory" className={({ isActive }) => isActive ? "active" : ""}>Memory</NavLink>
           <NavLink to="/shopping-list" className={({ isActive }) => isActive ? "active" : ""}>Shopping List</NavLink>
+          <NavLink to="/gallery" className={({ isActive }) => isActive ? "active" : ""}>Gallery</NavLink>
         </Menu>
       ) : (
         <div className="header">
@@ -44,6 +45,9 @@ export default function Header() {
               </li>
               <li className="nav-item">
                 <NavLink to="/shopping-list" className={({ isActive }) => isActive ? "active" : ""}>Shopping List</NavLink>
+              </li>
+              <li className="nav-item">
+                <NavLink to="/gallery" className={({ isActive }) => isActive ? "active" : ""}>Gallery</NavLink>
               </li>
             </ul>
           </nav>
