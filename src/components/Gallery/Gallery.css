@@ -1,5 +1,5 @@
 .gallery {
-    padding: 30px 0;
+    padding-bottom: 10px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -14,11 +14,10 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    background-color: #c2c3bf;
 }
 
 .gallery-main-image-container {
-    margin: 30px 0;
+    margin-bottom: 10px;
     height: 300px;
     width: 100%;
 }
@@ -32,9 +31,20 @@
 }
 
 .gallery-main-image img {
-    height: 300px;
-    width: 100%;
+    max-height: 100%;
+    max-width: 100%;
+}
+
+.portrait {
+    width: auto;
+    height: 100%;
     object-fit: contain;
+}
+
+.landscape {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
 }
 
 .gallery-main-image-nav-left {
@@ -56,7 +66,6 @@
 }
 
 .gallery-thumbnail-container {
-    background-color: #000;
     overflow-x: scroll;
     overflow-y: hidden;
     white-space: nowrap;
