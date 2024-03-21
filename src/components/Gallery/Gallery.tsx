@@ -29,7 +29,7 @@ export default function Gallery() {
         <div className="gallery-container">
         <div className="gallery-main-image-container">
           <div className="gallery-main-image">
-            <img src={images[currentImageIndex].image} onLoad={getImageOrientation} />
+            <img key={`image_` + currentImageIndex}src={images[currentImageIndex].image} onLoad={getImageOrientation} />
             <FontAwesomeIcon icon={faChevronLeft} className="gallery-main-image-nav-left" onClick={() => setCurrentImageIndex(currentImageIndex - 1)} />
             <FontAwesomeIcon icon={faChevronRight} className="gallery-main-image-nav-right" onClick={() => setCurrentImageIndex(currentImageIndex + 1)} />
           </div>
