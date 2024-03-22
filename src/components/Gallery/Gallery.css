@@ -18,13 +18,13 @@
 
 .gallery-main-image-container {
     margin-bottom: 10px;
-    height: 300px;
+    height: auto;
     width: 100%;
 }
 
 .gallery-main-image {
     position: relative;
-    height: 100%;
+    aspect-ratio: 16/9;
     font-weight: bold;
     font-size: x-large;
     color: rgb(42, 41, 41);
@@ -33,6 +33,12 @@
 .gallery-main-image img {
     max-height: 100%;
     max-width: 100%;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+img.image-visible {
+    opacity: 1;
 }
 
 .portrait {
@@ -47,22 +53,30 @@
     object-fit: cover;
 }
 
+.gallery-main-image-nav-right,
 .gallery-main-image-nav-left {
     position: absolute;
     top: 50%;
-    left: 0;
-    transform: translateY(-50%);
     padding: 10px;
     cursor: pointer;
+    transform: translateY(-50%);
+    background-color: #dad5d5;
+    opacity: 0.5;
+    color: #000;
+}
+
+.gallery-main-image-nav-left {
+    left: 0;
+    
 }
 
 .gallery-main-image-nav-right {
-    position: absolute;
-    top: 50%;
     right: 0;
-    transform: translateY(-50%);
-    padding: 10px;
-    cursor: pointer;
+}
+
+.gallery-main-image-nav-left:hover,
+.gallery-main-image-nav-right:hover {
+    opacity: 1;
 }
 
 .gallery-thumbnail-container {
