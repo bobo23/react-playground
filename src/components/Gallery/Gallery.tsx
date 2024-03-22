@@ -5,9 +5,16 @@ import Layout from '../Layout';
 import images from '../../data/images';
 import './Gallery.css';
 
+interface Image {
+  image: string;
+  thumb: string;
+  orientation: string;
+}
+
 export default function Gallery() {
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [isVisible, setIsVisible] = useState(true);
+  const [currentImageIndex, setCurrentImageIndex] = useState<number>(0);
+  const [isVisible, setIsVisible] = useState<boolean>(true);
+  const [imagesWithOrientation, setImagesWithOrientation] = useState<Image[]>([]);
   const thumbnailContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -17,15 +24,25 @@ export default function Gallery() {
     }, 0);
   }, [currentImageIndex]);
 
-  const imagesWithOrientation = images.map(image => {
-    const img = new Image();
-
-    img.src = image.thumb;
-
-    const orientation = img.naturalWidth > img.naturalHeight ? 'landscape' : 'portrait';
-
-    return { ...image, orientation };
-  });
+  useEffect(() => {
+    const loadImages = async () => {
+      const loadedImages = await Promise.all(
+        images.map((image) =>
+          new Promise<Image>((resolve) => {
+            const img = new Image();
+            img.src = image.thumb;
+            img.onload = () => {
+              const orientation = img.naturalWidth > img.naturalHeight ? 'landscape' : 'portrait';
+              resolve({ ...image, orientation });
+            };
+          })
+        )
+      );
+      setImagesWithOrientation(loadedImages);
+    };
+  
+    loadImages();
+  }, []);
 
   const changeImage = (newIndex: number) => {
     let finalIndex = newIndex;
@@ -46,16 +63,6 @@ export default function Gallery() {
     thumbnail?.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
   };
 
-  const getImageOrientation = (event: React.SyntheticEvent<HTMLImageElement>) => {
-    const img = event.currentTarget;
-    
-    if (img.naturalWidth > img.naturalHeight) {
-      img.classList.add('landscape');
-    } else {
-      img.classList.add('portrait');
-    }
-  }
-
   return(
     <Layout>
       <div className="gallery">
@@ -63,7 +70,15 @@ export default function Gallery() {
         <div className="gallery-container">
         <div className="gallery-main-image-container">
           <div className="gallery-main-image">
-            <img key={`image_` + currentImageIndex}src={images[currentImageIndex].image} onLoad={getImageOrientation} className={isVisible ? 'image-visible' : ''} />
+            {imagesWithOrientation.length > 0 ? (
+              <img
+                key={`image_` + currentImageIndex}
+                src={imagesWithOrientation[currentImageIndex]?.image}
+                className={`${isVisible ? 'image-visible' : ''} ${imagesWithOrientation[currentImageIndex]?.orientation}`}
+              />
+            ) : (
+              <div>Loading...</div>
+            )}
             <FontAwesomeIcon icon={faChevronLeft} className="gallery-main-image-nav-left" onClick={() => changeImage(currentImageIndex - 1)} />
             <FontAwesomeIcon icon={faChevronRight} className="gallery-main-image-nav-right" onClick={() => changeImage(currentImageIndex + 1)} />
           </div>

@@ -30,11 +30,21 @@
     color: rgb(42, 41, 41);
 }
 
+@media (max-width: 768px) {
+    .gallery-main-image {
+        font-size: large;
+    }
+}
+@media (max-width: 576px) {
+    .gallery-main-image {
+        font-size: medium;
+    }
+}
+
 .gallery-main-image img {
     max-height: 100%;
     max-width: 100%;
     opacity: 0;
-    transition: opacity 0.5s ease;
 }
 
 img.image-visible {
