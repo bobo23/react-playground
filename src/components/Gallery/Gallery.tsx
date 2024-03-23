@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronRight, faChevronLeft, faCircle } from '@fortawesome/free-solid-svg-icons';
 import { faCircle as faCircleRegular } from '@fortawesome/free-regular-svg-icons';
@@ -12,6 +12,8 @@ interface Image {
   orientation: string;
 }
 
+const SCROLL_DELAY = 0;
+
 export default function Gallery() {
   const [currentImageIndex, setCurrentImageIndex] = useState<number>(0);
   const [isVisible, setIsVisible] = useState<boolean>(true);
@@ -20,9 +22,12 @@ export default function Gallery() {
 
   useEffect(() => {
     setIsVisible(true);
-    setTimeout(() => {
+
+    const timer = setTimeout(() => {
       scrollToThumbnail(currentImageIndex);
-    }, 0);
+    }, SCROLL_DELAY);
+
+    return () => clearTimeout(timer);
   }, [currentImageIndex]);
 
   useEffect(() => {
@@ -44,10 +49,11 @@ export default function Gallery() {
         })
       )
     );
+
     setImagesWithOrientation(loadedImages);
   };
 
-  const changeImage = (newIndex: number) => {
+  const changeImage = useCallback((newIndex: number) => {
     let finalIndex = newIndex;
 
     if (newIndex < 0) {
@@ -59,12 +65,12 @@ export default function Gallery() {
     setCurrentImageIndex(finalIndex);
     setIsVisible(true);
     scrollToThumbnail(finalIndex);
-  };
+  }, []);
 
-  const scrollToThumbnail = (index: number) => {
+  const scrollToThumbnail = useCallback((index: number) => {
     const thumbnail = thumbnailContainerRef.current?.children[index] as HTMLElement;
     thumbnail?.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
-  };
+  }, []);
 
   return(
     <Layout>
