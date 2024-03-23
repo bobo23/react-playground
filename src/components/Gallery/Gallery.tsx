@@ -78,6 +78,7 @@ export default function Gallery() {
                   key={`image_` + currentImageIndex}
                   src={imagesWithOrientation[currentImageIndex]?.image}
                   className={`${isVisible ? 'image-visible' : ''} ${imagesWithOrientation[currentImageIndex]?.orientation}`}
+                  loading="lazy"
                 />
               ) : (
                 <div>Loading...</div>
@@ -99,7 +100,11 @@ export default function Gallery() {
           <div className="gallery-thumbnail-container" ref={thumbnailContainerRef}>
             {imagesWithOrientation.map((image, index) => (
               <div key={index} className="gallery-thumbnail" onClick={() => changeImage(index)}>
-                <img src={image.thumb} className={`${index === currentImageIndex ? 'active-thumb' : ''} ${image.orientation}`}/>
+                <img
+                  src={image.thumb}
+                  className={`${index === currentImageIndex ? 'active-thumb' : ''} ${image.orientation}`}
+                  loading="lazy"
+                />
               </div>
             ))}
           </div>
