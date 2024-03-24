@@ -20,6 +20,11 @@ export default function Gallery() {
   const [imagesWithOrientation, setImagesWithOrientation] = useState<Image[]>([]);
   const thumbnailContainerRef = useRef<HTMLDivElement>(null);
 
+  const scrollToThumbnail = useCallback((index: number) => {
+    const thumbnail = thumbnailContainerRef.current?.children[index] as HTMLElement;
+    thumbnail?.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+  }, []);
+
   useEffect(() => {
     setIsVisible(true);
 
@@ -28,7 +33,7 @@ export default function Gallery() {
     }, SCROLL_DELAY);
 
     return () => clearTimeout(timer);
-  }, [currentImageIndex]);
+  }, [currentImageIndex, scrollToThumbnail]);
 
   useEffect(() => {
     loadImages();
@@ -65,12 +70,7 @@ export default function Gallery() {
     setCurrentImageIndex(finalIndex);
     setIsVisible(true);
     scrollToThumbnail(finalIndex);
-  }, []);
-
-  const scrollToThumbnail = useCallback((index: number) => {
-    const thumbnail = thumbnailContainerRef.current?.children[index] as HTMLElement;
-    thumbnail?.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
-  }, []);
+  }, [scrollToThumbnail]);
 
   return(
     <Layout>
