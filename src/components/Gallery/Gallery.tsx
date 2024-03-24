@@ -16,9 +16,9 @@ const SCROLL_DELAY = 0;
 
 export default function Gallery() {
   const [currentImageIndex, setCurrentImageIndex] = useState<number>(0);
-  const [isVisible, setIsVisible] = useState<boolean>(true);
   const [imagesWithOrientation, setImagesWithOrientation] = useState<Image[]>([]);
   const thumbnailContainerRef = useRef<HTMLDivElement>(null);
+  const [animationClass, setAnimationClass] = useState<string>('');
 
   const scrollToThumbnail = useCallback((index: number) => {
     const thumbnail = thumbnailContainerRef.current?.children[index] as HTMLElement;
@@ -26,8 +26,6 @@ export default function Gallery() {
   }, []);
 
   useEffect(() => {
-    setIsVisible(true);
-
     const timer = setTimeout(() => {
       scrollToThumbnail(currentImageIndex);
     }, SCROLL_DELAY);
@@ -59,17 +57,38 @@ export default function Gallery() {
   };
 
   const changeImage = useCallback((newIndex: number) => {
-    let finalIndex = newIndex;
+    setCurrentImageIndex(prevIndex => {
+      if (newIndex === prevIndex) {
+        return prevIndex;
+      }
 
-    if (newIndex < 0) {
-      finalIndex = images.length - 1;
-    } else if (newIndex >= images.length) {
-      finalIndex = 0;
-    }
+      let finalIndex = newIndex;
 
-    setCurrentImageIndex(finalIndex);
-    setIsVisible(true);
-    scrollToThumbnail(finalIndex);
+      if (newIndex < 0) {
+        finalIndex = images.length - 1;
+      } else if (newIndex >= images.length) {
+        finalIndex = 0;
+      }
+      
+      if (finalIndex > prevIndex) {
+        setAnimationClass('slide-out-left');
+      } else {
+        setAnimationClass('slide-out-right');
+      }
+
+      setTimeout(() => {
+          if (finalIndex > prevIndex) {
+            setAnimationClass('slide-in-right');
+          } else {
+            setAnimationClass('slide-in-left');
+          }
+    
+          scrollToThumbnail(finalIndex);
+          console.log(prevIndex, finalIndex);
+      }, 500);
+
+      return finalIndex;
+    });
   }, [scrollToThumbnail]);
 
   return(
@@ -83,7 +102,7 @@ export default function Gallery() {
                 <img
                   key={`image_` + currentImageIndex}
                   src={imagesWithOrientation[currentImageIndex]?.image}
-                  className={`${isVisible ? 'image-visible' : ''} ${imagesWithOrientation[currentImageIndex]?.orientation}`}
+                  className={` ${imagesWithOrientation[currentImageIndex]?.orientation} image-slide ${animationClass}`}
                   loading="lazy"
                 />
               ) : (

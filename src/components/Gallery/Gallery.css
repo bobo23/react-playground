@@ -30,6 +30,8 @@
     font-weight: bold;
     font-size: x-large;
     color: rgb(42, 41, 41);
+    overflow: hidden;
+    margin-bottom: 5px;
 }
 
 @media (max-width: 768px) {
@@ -46,11 +48,27 @@
 .gallery-main-image img {
     max-height: 100%;
     max-width: 100%;
-    opacity: 0;
+    opacity: 1;
 }
 
-img.image-visible {
-    opacity: 1;
+.gallery-main-image img.image-slide {
+    transition: transform 0.5s ease;
+}
+
+.gallery-main-image img.slide-in-right {
+    transform: translateX(0);
+}
+
+.gallery-main-image img.slide-in-left {
+    transform: translateX(0);
+}
+
+.gallery-main-image img.slide-out-right {
+    transform: translateX(100%);
+}
+
+.gallery-main-image img.slide-out-left {
+    transform: translateX(-100%);
 }
 
 .portrait {
