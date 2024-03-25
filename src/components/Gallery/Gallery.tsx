@@ -48,7 +48,6 @@ export default function Gallery() {
           img.src = image.thumb;
           img.onload = () => {
             const orientation = img.naturalWidth > img.naturalHeight ? 'landscape' : 'portrait';
-            
             resolve({ ...image, orientation });
           };
         })
@@ -89,8 +88,16 @@ export default function Gallery() {
               ) : (
                 <div>Loading...</div>
               )}
-              <FontAwesomeIcon icon={faChevronLeft} className="gallery-main-image-nav-left" onClick={() => changeImage(currentImageIndex - 1)} />
-              <FontAwesomeIcon icon={faChevronRight} className="gallery-main-image-nav-right" onClick={() => changeImage(currentImageIndex + 1)} />
+              <FontAwesomeIcon
+                icon={faChevronLeft} 
+                className="gallery-main-image-nav-left"
+                onClick={() => changeImage(currentImageIndex - 1)}
+              />
+              <FontAwesomeIcon
+                icon={faChevronRight}
+                className="gallery-main-image-nav-right"
+                onClick={() => changeImage(currentImageIndex + 1)}
+              />
             </div>
             <div className="bullets">
               {imagesWithOrientation.map((_, index) => (
